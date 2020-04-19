@@ -6,7 +6,7 @@ angular.module('wui.date',[]).directive('wuiDate', function() {
 		// Assign the angular link function
 		compile: fieldCompile,
 
-		// Assign the angular directive template HTML
+		// Assign the angular directive templates HTML
 		template: fieldTemplate,
 		// templateUrl: "pageTemplate.html",
 
