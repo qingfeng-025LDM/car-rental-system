@@ -1,0 +1,42 @@
+      .main{
+          border: #2D93CA solid;
+          width: 420px;
+          height: 500px;
+          margin-left: 550px;
+          margin-top: 100px;
+      }
+      .user-info{
+          margin-top: 70px;
+          margin-left: 50px;
+          text-align: center;
+          width: 320px;
+          height: 330px;
+      }
+
+      .larry-input{
+          margin-left: 70px;
+          width: 240px;
+      }
+      .layui-form-label{
+          margin-left: -50px;
+      }
+
+      .layui-btn{
+          margin-left: 200px;
+          margin-top: 20px;
+      }
+
+      #login{
+          margin-top: 50px;
+      }
+      .title{
+          text-align: center;
+          font-size: 30px;
+          color: blue;
+          margin-top: 40px;
+      }
+      .info{
+          text-align: center;
+          font-size: 25px;
+          margin-top: 20px;
+      }
