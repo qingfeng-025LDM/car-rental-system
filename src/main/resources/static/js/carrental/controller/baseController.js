@@ -12,13 +12,13 @@ app.controller('baseController', function($scope){
     };
 
     $scope.reloadList=function(){
-        $scope.findPage($scope.paginationConf.currentPage, $scope.paginationConf.itemsPerPage);
+        $scope.getCarInfoPage($scope.paginationConf.currentPage, $scope.paginationConf.itemsPerPage);
     }
 
-    // //复选框的勾选与取消
+    //复选框的勾选与取消
     $scope.selectIds=[];	//选中的id集合
     $scope.updateSelectIds=function($event, id){		//更新复选框
-        if($event.target.checked){		////$event.target  表示目标复选框
+        if($event.target.checked){		//$event.target  表示目标复选框
             $scope.selectIds.push(id);
         }else{
             var index = $scope.selectIds.indexOf(id);

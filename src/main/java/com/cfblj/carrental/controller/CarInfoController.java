@@ -1,7 +1,10 @@
 package com.cfblj.carrental.controller;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cfblj.carrental.model.CarInfo;
 import com.cfblj.carrental.service.CarInfoService;
+import com.cfblj.carrental.utils.Pages;
 import com.cfblj.carrental.utils.ReturnObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,6 +28,17 @@ public class CarInfoController {
     public List<CarInfo> getCarInfoList(){
         List<CarInfo> carInfoList = carInfoService.getCarInfoList();
         return carInfoList;
+    }
+
+    /**
+     * 分页查询所有车辆信息
+     * @param curPage  当前页数
+     * @param size  当前页显示数据条数
+     * @return
+     */
+    @RequestMapping("/getCarInfoPage")
+    public Pages getCarInfoPage(int curPage, int size){
+        return carInfoService.getCarInfoPage(curPage, size);
     }
 
     /**

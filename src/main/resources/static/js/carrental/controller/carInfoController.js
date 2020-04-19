@@ -25,10 +25,10 @@ app.controller('carInfoController', function ($scope, $controller, carInfoServic
     }
     
     //分页查询所有车辆信息
-    $scope.findPage=function (currentPage, rows) {
-        carInfoService.getDepartmentPage(currentPage, rows).success(
+    $scope.getCarInfoPage=function (currentPage, rows) {
+        carInfoService.getCarInfoPage(currentPage, rows).success(
             function (response) {
-                $scope.list = response.rows;	//显示当前页数据
+                $scope.carInfoList = response.rows;	//显示当前页数据
                 $scope.paginationConf.totalItems = response.sum;	//更新总记录数
             }
         );

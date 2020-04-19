@@ -5,8 +5,8 @@ app.service('carInfoService', function ($http) {
     }
 
     //查询所有车辆信息，带分页
-    this.getDepartmentPage=function (currentPage, rows) {
-        return $http.get('/dept/deptPage?currentPage='+currentPage+'&rows='+rows);
+    this.getCarInfoPage=function (curPage, size) {
+        return $http.get('/carInfo/getCarInfoPage?curPage='+curPage+'&size='+size);
     }
 
     //根据部门id查询车辆信息
