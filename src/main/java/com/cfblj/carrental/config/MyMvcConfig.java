@@ -19,7 +19,8 @@ public class MyMvcConfig extends WebMvcConfigurerAdapter {
                 registry.addViewController("/home").setViewName("home.html");
                 registry.addViewController("/").setViewName("index.html");
                 registry.addViewController("/index").setViewName("index.html");
-                registry.addViewController("/emp/list").setViewName("emp/emp_list.html");   //跳转到员工信息页
+                //汽车管理
+                registry.addViewController("/car/carInfoList").setViewName("car/carinfolist.html");   //跳转到汽车信息页
                 registry.addViewController("/login/updatePwd").setViewName("emp/password_update.html");   //跳转到修改密码页
                 registry.addViewController("/dept/list").setViewName("dept/dept_list.html");    //跳转到部门信息页
                 registry.addViewController("/supplier/supplier_list").setViewName("supplier/supplier_list.html");   //跳转到供应商信息页

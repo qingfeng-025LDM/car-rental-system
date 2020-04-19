@@ -1,5 +1,6 @@
 package com.cfblj.carrental.model;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -13,11 +14,14 @@ import java.util.Date;
 @TableName("car_info")
 public class CarInfo implements Serializable {
 
-    @TableId
+    @TableId(type = IdType.UUID)
     private String id;
 
     @TableField("car_name")
     private String carName;     //名称
+
+    @TableField("license_plate_num")
+    private String licensePlateNum;     //车牌号
 
     @TableField("car_xh")
     private String carXh;       //型号
@@ -44,7 +48,7 @@ public class CarInfo implements Serializable {
     private Date releaseTime;       //发布时间
 
     @TableField("car_status")
-    private String carStatus;       //汽车状态(0禁止出租、1正常状态、2正在维修)
+    private String carStatus;       //汽车状态(0禁止出租、1正常、2正在维修，3已删除)
 
     @TableField("image")
     private String image;       //图片
@@ -69,6 +73,14 @@ public class CarInfo implements Serializable {
 
     public void setCarName(String carName) {
         this.carName = carName;
+    }
+
+    public String getLicensePlateNum() {
+        return licensePlateNum;
+    }
+
+    public void setLicensePlateNum(String licensePlateNum) {
+        this.licensePlateNum = licensePlateNum;
     }
 
     public String getCarXh() {

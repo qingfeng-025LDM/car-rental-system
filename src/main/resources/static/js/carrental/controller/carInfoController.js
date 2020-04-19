@@ -1,32 +1,32 @@
-app.controller('departmentController', function ($scope, $controller, departmentService) {
+app.controller('carInfoController', function ($scope, $controller, carInfoService) {
 
     $controller('baseController', {$scope:$scope});
 
-    //查询所有部门
-    $scope.getAllDepartment=function () {
-        departmentService.getAllDepartment().success(
+    //查询所有车辆信息
+    $scope.getCarInfoList=function () {
+        carInfoService.getCarInfoList().success(
             function (response) {
-                $scope.deptList = response;
+                $scope.carInfoList = response;
             }
         );
     }
 
-    //根据部门id查询部门
-    $scope.getDepartmentById=function(id){
-        departmentService.getDepartmentById(id).success(
+    //根据部门id查询车辆信息
+    $scope.getCarInfoById=function(id){
+        carInfoService.getCarInfoById(id).success(
             function (response) {
                 if(response != null){
-                    $scope.department=response;
+                    $scope.carInfo = response.data;
                 }else{
-                    layui.msg("部门不存在！", {icon: 2});
+                    layui.msg("查询的车辆信息不存在！", {icon: 2});
                 }
             }
         );
     }
     
-    //查询所有部门，带分页
+    //分页查询所有车辆信息
     $scope.findPage=function (currentPage, rows) {
-        departmentService.getDepartmentPage(currentPage, rows).success(
+        carInfoService.getDepartmentPage(currentPage, rows).success(
             function (response) {
                 $scope.list = response.rows;	//显示当前页数据
                 $scope.paginationConf.totalItems = response.sum;	//更新总记录数
@@ -34,16 +34,17 @@ app.controller('departmentController', function ($scope, $controller, department
         );
     }
 
-  //  $scope.department={};   //初始化
-    //保存部门信息
-    $scope.saveDepartment=function () {
-        var departmentMethod;
-        if($scope.department.deptId != null){
-            departmentMethod = departmentService.updateDepartment($scope.department); //修改
+  //  $scope.carInfo={};   //初始化
+    //保存车辆信息
+    $scope.saveCarInfo=function () {
+        var carInfoRes;
+        console.log($scope.carInfo);
+        if($scope.carInfo.id != null){
+            carInfoRes = carInfoService.updateCarInfo($scope.carInfo); //修改
         }else{
-            departmentMethod = departmentService.addDepartment($scope.department);    //添加
+            carInfoRes = carInfoService.addCarInfo($scope.carInfo);    //添加
         }
-        departmentMethod.success(
+        carInfoRes.success(
             function (response) {
                 if(response.success){
                     $scope.reloadList();
@@ -54,22 +55,24 @@ app.controller('departmentController', function ($scope, $controller, department
             }
         );
     }
-    $scope.editDept=function () {       //部门信息弹窗
-        // function editEmp() {
+    $scope.editCarInfo=function () {       //车辆信息弹窗
+        layui.use('layer', function () {
+            var layer = layui.layer;
+
             layer.open({
-                title: ['部门信息', 'font-size:20px'],
+                title: ['车辆信息', 'font-size:20px'],
                 type: 1,
                 maxmin: true,
                 skin: 'layui-layer-rim', //加上边框
-                area: ['600px', '360px'],
+                area: ['700px', '600px'],
                 shadeClose: false, //关闭遮罩关闭
-                content: $('#edit'), //'/dept/edit',
-                btn: ['保存','取消'],
-                btn1: function(index, layreo){
-                    if ($scope.department.deptName == null){
-                        layer.msg("部门名称不能为空！", {icon:2});
-                    }else {
-                        $scope.saveDepartment();
+                content: $('#editOrAddPop'),
+                btn: ['保存', '取消'],
+                btn1: function (index, layreo) {
+                    if ($scope.carInfo.carName == null) {
+                        layer.msg("车辆名称不能为空！", {icon: 2});
+                    } else {
+                        $scope.saveCarInfo();
                         $scope.toggle();    //修改ng-hide的值
                         layer.close(index);
                     }
@@ -81,13 +84,13 @@ app.controller('departmentController', function ($scope, $controller, department
                     $scope.toggle();
                 }
             });
-        // }
+        });
     }
 
 
-    //删除部门
-    $scope.delDepartment=function (id) {
-        departmentService.delDepartment(id).success(
+    //删除车辆信息
+    $scope.delCarInfoById=function (id) {
+        carInfoService.delCarInfoById(id).success(
             function (response) {
                 if(response.success){
                     $scope.reloadList();
@@ -99,17 +102,17 @@ app.controller('departmentController', function ($scope, $controller, department
         );
     }
     //单个删除询问
-    $scope.delDeptConfirm=function(id){
+    $scope.delCarConfirm=function(id){
         layer.confirm('是否删除？', {
             btn: ['是', '否']
         },function () {
-            $scope.delDepartment(id);
+            $scope.delCarInfoById(id);
         });
     }
 
-    //批量删除
-    $scope.delDepartments=function () {
-        departmentService.delDepartments($scope.selectIds).success(
+    //批量删除车辆信息
+    $scope.delCars=function () {
+        carInfoService.delCarInfoByIds($scope.selectIds).success(
             function (response) {
                 if(response.success){
                     $scope.reloadList();
@@ -122,16 +125,22 @@ app.controller('departmentController', function ($scope, $controller, department
         );
     }
     //批量删除询问
-    $scope.delDeptsConfirm=function(){
+    $scope.delCarsConfirm=function(){
         if ($scope.selectIds.length == 0){
-            layer.alert("请选择要删除的部门", {icon:0})
+            layer.alert("请选择要删除的车辆", {icon:0})
         }else {
             layer.confirm('是否删除？', {
                 btn: ['是', '否']
             }, function () {
-                $scope.delDepartments();
+                $scope.delCars();
             });
         }
     }
+
+    //是否租用
+    $scope.isrent=['否', '是'];
+
+    //车辆状态
+    $scope.status=['禁止出租', '正常', '正在维修', '已删除'];
     
 });
