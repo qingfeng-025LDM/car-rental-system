@@ -7,11 +7,13 @@ import com.cfblj.carrental.model.CarInfo;
 import com.cfblj.carrental.model.User;
 import com.cfblj.carrental.service.CarInfoService;
 import com.cfblj.carrental.service.UserService;
+import org.springframework.stereotype.Service;
 
 /**
  * @author Wuhz
  * @date 2020-4-20 18:48
  */
+@Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
 
 }
