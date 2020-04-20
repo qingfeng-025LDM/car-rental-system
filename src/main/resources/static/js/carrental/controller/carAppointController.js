@@ -1,10 +1,10 @@
-app.controller('employeeController', function ($scope, $controller, employeeService, departmentService) {
+app.controller('carAppointController', function ($scope, $controller, carAppointService) {
 
-    $controller('baseSearchController', {$scope:$scope});
+    $controller('baseController', {$scope:$scope});
 
     //查询所有员工，带分页
     $scope.findPage=function (currentPage, rows) {
-        employeeService.getEmployeePage(currentPage, rows).success(
+        carAppointService.getCarAppointPage(currentPage, rows).success(
             function (response) {
                 $scope.list = response.rows;	//显示当前页数据
                 $scope.paginationConf.totalItems = response.sum;	//更新总记录数
@@ -12,32 +12,32 @@ app.controller('employeeController', function ($scope, $controller, employeeServ
         );
     }
 
-    //根据id查询员工信息
-    $scope.getEmployeeById=function (id) {
-        employeeService.getEmpById(id).success(
+    //根据id查询车辆预约信息
+    $scope.getCarAppointById=function (id) {
+        carAppointService.getCarAppointById(id).success(
             function (response) {
                 if(response != null){
-                    $scope.employee=response;
+                    $scope.carAppoint=response;
                 }else{
-                    layer.msg("员工不存在", {icon: 2});
+                    layer.msg("预约信息不存在", {icon: 2});
                 }
             }
         );
     }
     //员工信息弹窗
-    $scope.editEmp=function () {
+    $scope.editCarAppoint=function () {
         layui.use('layer', function () {
             var layer = layui.layer;
 
             layer.open({
-                title: ['员工信息', 'font-size:20px'],
+                title: ['车辆预约信息', 'font-size:20px'],
                 type: 1,
                 maxmin: true,
                 skin: 'layui-layer-rim', //加上边框
                 area: ['700px', '500px'],
                 offset: '50px',
                 shadeClose: false, //关闭遮罩关闭
-                content: $('#edit'), //弹窗的内容
+                content: $('#editOrAddPop'), //弹窗的内容
                 btn: ['保存','取消'],
                 btn1: function(index, layreo){
                     $scope.saveEmployee();
@@ -54,15 +54,15 @@ app.controller('employeeController', function ($scope, $controller, employeeServ
 
         })
     }
-    //保存部门信息
-    $scope.saveEmployee=function () {
-        var employeeMethod;
+    //保存车辆预约信息
+    $scope.saveCarAppoint=function () {
+        var carAppointRes;
         if($scope.employee.empId != null){
-            employeeMethod = employeeService.updateEmployee($scope.employee, $scope.oldDeptId); //修改
+            carAppointRes = carAppointService.updateCarAppoint($scope.carAppoint); //修改
         }else{
-            employeeMethod = employeeService.addEmployee($scope.employee);    //添加
+            carAppointRes = carAppointService.addCarAppoint($scope.carAppoint);    //添加
         }
-        employeeMethod.success(
+        carAppointRes.success(
             function (response) {
                 if(response.success){
                     $scope.reloadList();
@@ -152,7 +152,7 @@ app.controller('employeeController', function ($scope, $controller, employeeServ
         $scope.oldDeptId = value1;
     });
 
-    //员工状态
-    $scope.status=['禁用','正常'];
+    //预约状态
+    $scope.status=['预约中','正在租用', '已超期', '已取消'];
 
 });

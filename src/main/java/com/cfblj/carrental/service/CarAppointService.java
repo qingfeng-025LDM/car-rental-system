@@ -8,4 +8,6 @@ public interface CarAppointService extends IService<CarAppoint> {
     Pages getCarAppointPage(int curPage, int size);
 
     CarAppoint getCarAppointById(String id);
+
+    void addCarAppoint(CarAppoint carAppoint);
 }

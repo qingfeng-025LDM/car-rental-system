@@ -60,7 +60,7 @@ public class CarInfoController {
      * @return
      */
     @RequestMapping("/updateCarInfo")
-    public ReturnObject updateCarInfo(CarInfo carInfo){
+    public ReturnObject updateCarInfo(@RequestBody CarInfo carInfo){
         try {
             carInfoService.updateCarInfo(carInfo);
             return new ReturnObject(true, "修改汽车信息成功");

@@ -12,7 +12,7 @@ app.controller('baseController', function($scope){
     };
 
     $scope.reloadList=function(){
-        $scope.getCarInfoPage($scope.paginationConf.currentPage, $scope.paginationConf.itemsPerPage);
+        $scope.findPage($scope.paginationConf.currentPage, $scope.paginationConf.itemsPerPage);
     }
 
     //复选框的勾选与取消

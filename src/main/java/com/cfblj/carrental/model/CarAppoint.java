@@ -30,7 +30,13 @@ public class CarAppoint implements Serializable {
     private String userId;
 
     @TableField("status")
-    private String status;
+    private String status;      //(0预约中、1正在租用、2已超期、3已取消)
+
+    @TableField(exist = false)
+    private User user;
+
+    @TableField(exist = false)
+    private CarInfo carInfo;
 
     public String getId() {
         return id;
@@ -78,5 +84,21 @@ public class CarAppoint implements Serializable {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public CarInfo getCarInfo() {
+        return carInfo;
+    }
+
+    public void setCarInfo(CarInfo carInfo) {
+        this.carInfo = carInfo;
     }
 }

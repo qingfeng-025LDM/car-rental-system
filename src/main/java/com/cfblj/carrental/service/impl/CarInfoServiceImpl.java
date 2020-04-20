@@ -44,10 +44,6 @@ public class CarInfoServiceImpl extends ServiceImpl<CarInfoMapper, CarInfo> impl
     @Override
     public Pages getCarInfoPage(int curPage, int size) {
         PageHelper.startPage(curPage, size);
-//        List<CarInfo> carInfos = carInfoMapper.selectList(null);
-//        Page<CarInfo> page = (Page<CarInfo>)carInfoMapper.selectList(null);
-//        List<CarInfo> carInfos = carInfoMapper.selectCarInfoList();
-//        System.out.println(carInfos);
         Page<CarInfo> page = (Page<CarInfo>)carInfoMapper.selectCarInfoList();
         return new Pages(page.getTotal(), page.getResult());
     }
