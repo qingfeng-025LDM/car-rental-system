@@ -1,7 +1,8 @@
 package com.cfblj.carrental.controller;
 
-import com.cfblj.carrental.model.CarInfo;
+import com.cfblj.carrental.model.Order;
 import com.cfblj.carrental.model.User;
+import com.cfblj.carrental.service.OrderService;
 import com.cfblj.carrental.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,21 +11,21 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/user")
-public class UserController {
+@RequestMapping("/order")
+public class OrderController {
 
     @Autowired
-    private UserService userService;
+    private OrderService orderService;
 
-    @RequestMapping("/getUserList")
-    public List<User> getUserList(){
-        List<User> list = userService.list();
+    @RequestMapping("/getOrderList")
+    public List<Order> getOrderList(){
+        List<Order> list = orderService.list();
         return list;
     }
 
-    @RequestMapping("/regist")
-    public boolean regist(User user){
-        boolean save = userService.save(user);
+    @RequestMapping("/creat")
+    public boolean regist(Order order){
+        boolean save = orderService.save(order);
         return save;
     }
 

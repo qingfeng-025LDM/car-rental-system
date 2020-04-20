@@ -1,5 +1,6 @@
 package com.cfblj.carrental.model;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.io.Serializable;
@@ -13,13 +14,18 @@ public class User implements Serializable {
     private String birthday;
     private String phone;
     private String email;
+    @TableField("is_member")
     private String isMember;
+    @TableField("login_name")
     private String loginName;
     private String password;
     private String status;
     private String account;
+    @TableField("user_type")
     private String userType;
+    @TableField("car_num")
     private String carNum;
+    @TableField("driving_license_image")
     private String drivingLicenseImage;
 
     public String getId() {
