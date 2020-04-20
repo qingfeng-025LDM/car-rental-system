@@ -25,8 +25,8 @@ app.controller('carInfoController', function ($scope, $controller, carInfoServic
     }
     
     //分页查询所有车辆信息
-    $scope.getCarInfoPage=function (currentPage, rows) {
-        carInfoService.getCarInfoPage(currentPage, rows).success(
+    $scope.getCarInfoPage=function (curPage, size) {
+        carInfoService.getCarInfoPage(curPage, size).success(
             function (response) {
                 $scope.carInfoList = response.rows;	//显示当前页数据
                 $scope.paginationConf.totalItems = response.sum;	//更新总记录数

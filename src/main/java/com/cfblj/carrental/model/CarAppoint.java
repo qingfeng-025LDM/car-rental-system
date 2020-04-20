@@ -1,5 +1,7 @@
 package com.cfblj.carrental.model;
 
+
+
 import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.io.Serializable;

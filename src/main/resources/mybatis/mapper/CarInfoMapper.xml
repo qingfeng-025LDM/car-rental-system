@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cfblj.carrental.mapper.CarInfoMapper">
+
+    <select id="selectCarInfoList" resultType="com.cfblj.carrental.model.CarInfo">
+        select * from car_info
+    </select>
+
+
+</mapper>

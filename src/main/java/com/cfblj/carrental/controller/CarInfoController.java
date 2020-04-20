@@ -1,7 +1,5 @@
 package com.cfblj.carrental.controller;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cfblj.carrental.model.CarInfo;
 import com.cfblj.carrental.service.CarInfoService;
 import com.cfblj.carrental.utils.Pages;
