@@ -15,6 +15,8 @@ public class Order {
     private String userId;
     @TableField("create_time")
     private String createTime;
+    @TableField("car_id")
+    private String carId;
 
     public String getId() {
         return id;
@@ -62,5 +64,13 @@ public class Order {
 
     public void setCreateTime(String createTime) {
         this.createTime = createTime;
+    }
+
+    public String getCarId() {
+        return carId;
+    }
+
+    public void setCarId(String carId) {
+        this.carId = carId;
     }
 }
