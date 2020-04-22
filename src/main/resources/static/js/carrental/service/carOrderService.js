@@ -1,4 +1,4 @@
-app.service('purchaseOrderService', function ($http) {
+app.service('carOrderService', function ($http) {
     this.getAllPurchaseOrderPage=function (currentPage, rows) {
         return $http.get('/purchase/purchaseOrderPage?currentPage='+currentPage+'&rows='+rows);
     }

@@ -1,6 +1,5 @@
 package com.cfblj.carrental.controller;
 
-import com.cfblj.carrental.model.CarInfo;
 import com.cfblj.carrental.model.User;
 import com.cfblj.carrental.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

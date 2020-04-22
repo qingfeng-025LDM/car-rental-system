@@ -1,4 +1,4 @@
-app.controller('productCategoryController', function ($scope, $controller, productCategoryService) {
+app.controller('userInfoController', function ($scope, $controller, productCategoryService) {
 
     $controller('baseController', {$scope:$scope});
 

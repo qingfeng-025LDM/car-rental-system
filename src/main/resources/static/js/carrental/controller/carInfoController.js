@@ -3,7 +3,7 @@ app.controller('carInfoController', function ($scope, $controller, carInfoServic
     $controller('baseController', {$scope:$scope});
 
     //查询所有车辆信息
-    $scope.findPage=function () {
+    $scope.getCarInfoList=function () {
         carInfoService.getCarInfoList().success(
             function (response) {
                 $scope.carInfoList = response;
@@ -25,7 +25,7 @@ app.controller('carInfoController', function ($scope, $controller, carInfoServic
     }
     
     //分页查询所有车辆信息
-    $scope.getCarInfoPage=function (curPage, size) {
+    $scope.findPage=function (curPage, size) {
         carInfoService.getCarInfoPage(curPage, size).success(
             function (response) {
                 $scope.carInfoList = response.rows;	//显示当前页数据

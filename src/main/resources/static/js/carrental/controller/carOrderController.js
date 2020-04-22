@@ -1,9 +1,9 @@
-app.controller('purchaseOrderController', function ($scope, $controller, purchaseOrderService, purchaseOrderItemService, employeeService) {
+app.controller('carOrderController', function ($scope, $controller, carOrderService) {
 
     $controller('baseSearchController', {$scope:$scope});
 
     $scope.findPage=function (currentPage, rows) {
-        purchaseOrderService.getAllPurchaseOrderPage(currentPage, rows).success(
+        carOrderService.getAllPurchaseOrderPage(currentPage, rows).success(
             function (response) {
                 $scope.list = response.rows;	//显示当前页数据
                 $scope.paginationConf.totalItems = response.sum;	//更新总记录数
@@ -11,11 +11,8 @@ app.controller('purchaseOrderController', function ($scope, $controller, purchas
         );
     }
 
-
-
-
     //采购订单项弹窗
-    $scope.checkPurOrderItem=function () {
+    $scope.checkCarOrderDetail=function () {
         layui.use('layer', function () {
             var layer = layui.layer;
 
@@ -37,7 +34,7 @@ app.controller('purchaseOrderController', function ($scope, $controller, purchas
 
     //根据销售订单id查询订单选项
     $scope.findItemByPurOrderId=function (purOrderId) {
-        purchaseOrderItemService.findItemByPurOrderId(purOrderId).success(
+        carOrderService.findItemByPurOrderId(purOrderId).success(
             function (response) {
                 $scope.purOrderItemList=response;
             }
@@ -46,7 +43,7 @@ app.controller('purchaseOrderController', function ($scope, $controller, purchas
 
     $scope.searchPurOrder={};
     $scope.search=function(currentPage, rows){
-        purchaseOrderService.searchPurchaseOrder(currentPage, rows, $scope.searchPurOrder).success(
+        carOrderService.searchPurchaseOrder(currentPage, rows, $scope.searchPurOrder).success(
             function (response) {
                 $scope.list = response.rows;	//显示当前页数据
                 $scope.paginationConf.totalItems = response.sum;	//更新总记录数

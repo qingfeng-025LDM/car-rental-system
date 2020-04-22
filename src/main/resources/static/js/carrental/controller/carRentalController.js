@@ -1,19 +1,19 @@
-app.controller('stockController', function ($scope, $controller, stockService) {
+app.controller('stockController', function ($scope, $controller, carRentalService) {
 
     $controller('baseController', {$scope:$scope});
 
     //查询所有仓库信息
     $scope.getStockList=function(){
-        stockService.getStockList().success(
+        carRentalService.getStockList().success(
             function (response) {
                 $scope.stockList = response;
             }
         );
     }
 
-    //分页查询所有仓库信息
-    $scope.findPage=function (currentPage, rows) {
-        stockService.getAllStockPage(currentPage, rows).success(
+    //分页查询所有汽车租用信息
+    $scope.findPage=function (curPage, size) {
+        carRentalService.getCarRentalPage(curPage, size).success(
             function (response) {
                 $scope.list = response.rows;	//显示当前页数据
                 $scope.paginationConf.totalItems = response.sum;	//更新总记录数
@@ -22,8 +22,8 @@ app.controller('stockController', function ($scope, $controller, stockService) {
     }
 
     //根据id查询仓库信息
-    $scope.getStockById=function (id) {
-        stockService.getStockById(id).success(
+    $scope.getCarRentalById=function (id) {
+        carRentalService.getCarRentalById(id).success(
             function (response) {
                 if(response != null){
                     $scope.stock=response;
@@ -33,12 +33,13 @@ app.controller('stockController', function ($scope, $controller, stockService) {
             }
         );
     }
-    //供应商信息弹窗
-    $scope.editStock=function () {
+
+    //汽车租用信息弹窗
+    $scope.editCarRental=function () {
         layui.use('layer', function () {
             var layer = layui.layer;
             layer.open({
-                title: ['仓库信息', 'font-size:20px'],
+                title: ['出租信息', 'font-size:20px'],
                 type: 1,
                 maxmin: true,
                 skin: 'layui-layer-rim', //加上边框
@@ -47,7 +48,6 @@ app.controller('stockController', function ($scope, $controller, stockService) {
                 content: $('#edit'), //弹窗的内容
                 btn: ['保存','取消'],
                 btn1: function(index, layreo){
-                    $scope.saveStock();
                     $scope.toggle();    //修改ng-hide的值
                     layer.close(index);
                 },
@@ -59,25 +59,6 @@ app.controller('stockController', function ($scope, $controller, stockService) {
                 }
             });
         })
-    }
-    //保存供应商信息
-    $scope.saveStock=function () {
-        var stockMethod;
-        if($scope.stock.stockId != null){
-            stockMethod = stockService.updateStock($scope.stock); //修改
-        }else{
-            stockMethod = stockService.addStock($scope.stock);    //添加
-        }
-        stockMethod.success(
-            function (response) {
-                if(response.success){
-                    $scope.reloadList();
-                    layer.msg(response.msg, {icon: 1});
-                }else{
-                    layer.msg(response.msg, {icon: 2});
-                }
-            }
-        );
     }
 
     $scope.myStockStatus=true;
