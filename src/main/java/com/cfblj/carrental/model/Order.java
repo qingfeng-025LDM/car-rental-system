@@ -1,20 +1,29 @@
 package com.cfblj.carrental.model;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
 @TableName("car_order")
 public class Order {
+    @TableId(type = IdType.UUID)
     private String id;
+
     @TableField("order_num")
     private String orderNum;
+
     @TableField("total_price")
     private double totalPrice;
+
     private String status;
+
     @TableField("user_id")
     private String userId;
+
     @TableField("create_time")
     private String createTime;
+
     @TableField("car_id")
     private String carId;
 

@@ -2,8 +2,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cfblj.carrental.mapper.CarInfoMapper">
 
-    <select id="selectCarInfoList" resultType="com.cfblj.carrental.model.CarInfo">
-        select * from car_info
+    <select id="selectCarInfoList" resultType="com.cfblj.carrental.model.CarInfo" parameterType="com.cfblj.carrental.model.CarInfo">
+        select a.* from car_info a
+        left join user_info b on b.id = a.car_owner_id
+        <where>
+            <if test="licensePlateNum != null and licensePlateNum != ''">
+                and a.license_plate_num like '%${licensePlateNum}%'
+            </if>
+            <if test="carName != null and carName != ''">
+                and a.car_name like '%${carName}%'
+            </if>
+            <if test="carXh != null and carXh != ''">
+                and a.car_xh like '%${carXh}%'
+            </if>
+            <if test="isRented != null and isRented != ''">
+                and a.is_rented = #{isRented}
+            </if>
+        </where>
     </select>
 
 

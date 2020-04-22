@@ -15,49 +15,51 @@
 
     <script th:src="@{/js/carrental/base_pagination.js}" type="text/javascript"></script>
     <script th:src="@{/js/carrental/service/carInfoService.js}" type="text/javascript"></script>
-    <script th:src="@{/js/carrental/controller/baseSearchController.js}" type="text/javascript"></script>
+    <script th:src="@{/js/carrental/controller/baseController.js}" type="text/javascript"></script>
+    <!--<script th:src="@{/js/carrental/controller/baseSearchController.js}" type="text/javascript"></script>-->
     <script th:src="@{/js/carrental/controller/carInfoController.js}" type="text/javascript"></script>
 </head>
 <body ng-app="carrental" ng-controller="carInfoController">
 <form class="layui-form" method="post" id="searchFrm">
     <div class="layui-form-item">
         <div class="layui-inline">
-            <label class="layui-form-label">车牌号:</label>
+            <label class="layui-form-label">订单号:</label>
             <div class="layui-input-inline" style="padding: 5px">
-                <input type="text" ng-model="searchCarInfo.licensePlateNum" autocomplete="off" class="layui-input layui-input-inline"
-                        style="height: 30px;border-radius: 10px">
+                <input type="text" name="carnumber" autocomplete="off" class="layui-input layui-input-inline"
+                       style="height: 30px;border-radius: 10px">
             </div>
         </div>
         <div class="layui-inline">
-            <label class="layui-form-label">车辆名称:</label>
+            <label class="layui-form-label">订单起始时间:</label>
             <div class="layui-input-inline" style="padding: 5px">
-                <input type="text" ng-model="searchCarInfo.carName" autocomplete="off" class="layui-input layui-input-inline"
-                        style="height: 30px;border-radius: 10px">
+                <input type="text" name="cartype" autocomplete="off" class="layui-input layui-input-inline"
+                       style="height: 30px;border-radius: 10px">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">订单结束时间:</label>
+            <div class="layui-input-inline" style="padding: 5px">
+                <input type="text" name="color" autocomplete="off" class="layui-input layui-input-inline"
+                       style="height: 30px;border-radius: 10px">
             </div>
         </div>
     </div>
     <div class="layui-form-item">
         <div class="layui-inline">
-            <label class="layui-form-label">车辆型号:</label>
+            <label class="layui-form-label">客户姓名:</label>
             <div class="layui-input-inline" style="padding: 5px">
-                <input type="text" ng-model="searchCarInfo.carXh" autocomplete="off" class="layui-input layui-input-inline"
+                <input type="text" name="description" autocomplete="off" class="layui-input layui-input-inline"
                         style="height: 30px;border-radius: 10px">
             </div>
         </div>
         <div class="layui-inline">
-            <label class="layui-form-label">是否出租:</label>
-            <div class="layui-input-inline">
-                <!--<select class="form-control selectSupplier" ng-model="searchCarInfo.isRented"-->
-                        <!--ng-options="dept.deptId as dept.deptName for dept in departmentList">-->
-                <!--</select>-->
-            </div>
             <button type="button"
                     class="layui-btn layui-btn-normal layui-icon layui-icon-search layui-btn-radius layui-btn-sm"
-                    id="doSearch" style="margin-top: 4px" ng-click="reloadList()">查询
+                    id="doSearch" style="margin-top: 4px">查询
             </button>
             <button type="reset"
                     class="layui-btn layui-btn-warm layui-icon layui-icon-refresh layui-btn-radius layui-btn-sm"
-                    style="margin-top: 4px" ng-click="searchCarAppoint={};reloadList()">重置
+                    style="margin-top: 4px">重置
             </button>
         </div>
     </div>
@@ -73,25 +75,21 @@
     <table class="layui-table">
         <colgroup>
             <col width="20">
+            <col width="250">
             <col width="150">
             <col width="150">
             <col width="100">
-            <col width="100">
-            <col width="80">
-            <col width="150">
             <col width="100">
             <col>
         </colgroup>
         <thead>
         <tr>
             <th><input type="checkbox" name="" lay-skin="primary"></th>
-            <th>汽车名称</th>
-            <th>汽车型号</th>
-            <th>是否租用</th>
-            <th>出租价格</th>
-            <th>座位数</th>
-            <th>发布时间</th>
-            <th>状态</th>
+            <th>订单编号</th>
+            <th>生成时间</th>
+            <th>客户姓名</th>
+            <th>总金额</th>
+            <th>订单状态</th>
             <th>操作</th>
         </tr>
         </thead>
@@ -100,9 +98,7 @@
             <td><input type="checkbox" name="" lay-skin="primary"></td>
             <td>{{carInfo.carName}}</td>
             <td>{{carInfo.carXh}}</td>
-            <td>{{isrent[carInfo.isRented]}}</td>
             <td>{{carInfo.rentPrice}}</td>
-            <td>{{carInfo.seatNum}}</td>
             <td>{{carInfo.releaseTime}}</td>
             <td>{{status[carInfo.carStatus]}}</td>
             <td>
@@ -124,86 +120,96 @@
             <div class="layui-row layui-col-space10">
                 <div class="layui-col-md9 layui-col-xs7">
                     <div class="layui-form-item magt3">
-                        <label class="layui-form-label">车辆名称:</label>
+                        <label class="layui-form-label">订单编号:</label>
                         <div class="layui-input-block" style="padding: 5px">
                             <input type="text"  id="carName" autocomplete="off" class="layui-input"
                                    lay-verify="required" ng-model="carInfo.carName"
-                                   placeholder="请输入汽车名称" style="height: 30px;border-radius: 10px">
+                                   style="height: 30px;border-radius: 10px">
                         </div>
                     </div>
                     <div class="layui-form-item magt3">
-                        <label class="layui-form-label">车牌号:</label>
+                        <label class="layui-form-label">生成时间:</label>
                         <div class="layui-input-block" style="padding: 5px">
                             <input type="text" id="carnumber" autocomplete="off" class="layui-input"
                                    lay-verify="required" ng-model="carInfo.licensePlateNum"
-                                   placeholder="请输入车牌号" style="height: 30px;border-radius: 10px">
+                                    style="height: 30px;border-radius: 10px">
                         </div>
                     </div>
                     <div class="layui-form-item">
-                        <label class="layui-form-label">车辆型号:</label>
+                        <label class="layui-form-label">客户姓名:</label>
                         <div class="layui-input-block" style="padding: 5px">
                             <input type="text" ng-model="carInfo.carXh" autocomplete="off" class="layui-input"
-                                   placeholder="请输入车辆类型" style="height: 30px;border-radius: 10px">
+                                    style="height: 30px;border-radius: 10px">
                         </div>
                     </div>
                     <div class="layui-form-item">
-                        <label class="layui-form-label">座位数:</label>
+                        <label class="layui-form-label">总金额:</label>
                         <div class="layui-input-block" style="padding: 5px">
                             <input type="text" ng-model="carInfo.seatNum" autocomplete="off" class="layui-input"
-                                   placeholder="请输入座位数" style="height: 30px;border-radius: 10px">
+                                    style="height: 30px;border-radius: 10px">
                         </div>
                     </div>
                 </div>
-                <div class="layui-col-md3 layui-col-xs5">
-                    <div class="layui-upload-list thumbBox mag0 magt3" id="carimgDiv">
-                        <!--显示要上传的图片-->
-                        <img class="layui-upload-img thumbImg" id="showCarImg">
-                        <!--保存当前显示图片的地址-->
-                        <input type="hidden" name="carimg" id="carimg">
-                    </div>
-                </div>
             </div>
             <div class="layui-form-item magb0">
-                <label class="layui-form-label">车辆用途:</label>
+                <label class="layui-form-label">订单状态:</label>
                 <div class="layui-input-block" style="padding: 5px">
                     <input type="text" ng-model="carInfo.purpose" autocomplete="off" class="layui-input"
-                           placeholder="请输入车辆用途" style="height: 30px;border-radius: 10px">
-                </div>
-            </div>
-            <div class="layui-form-item magb0">
-                <div class="layui-inline">
-                    <label class="layui-form-label">车辆状态:</label>
-                    <div class="layui-input-block" style="padding: 5px">
-                        <input type="text" ng-model="carInfo.carStatus" class="layui-input" lay-verify="required|number"
-                               placeholder="请输入车辆状态" style="height: 30px;border-radius: 10px">
-                    </div>
-                </div>
-                <div class="layui-inline">
-                    <label class="layui-form-label">出租价格:</label>
-                    <div class="layui-input-block" style="padding: 5px">
-                        <input type="text" ng-model="carInfo.rentPrice" class="layui-input" lay-verify="required|number"
-                               placeholder="请输入车辆出租价格" style="height: 30px;border-radius: 10px">
-                    </div>
-                </div>
-            </div>
-            <div class="layui-form-item magb0">
-                <div class="layui-inline">
-                    <label class="layui-form-label">有无代驾:</label>
-                    <div class="layui-input-inline">
-                        <input type="radio" ng-model="carInfo.hasDriver" value="1" title="有">
-                        <input type="radio" ng-model="carInfo.hasDriver" value="0" title="无">
-                    </div>
-                </div>
-                <div class="layui-inline">
-                    <label class="layui-form-label">是否出租:</label>
-                    <div class="layui-input-inline">
-                        <input type="radio" ng-model="carInfo.isRented" value="1" title="已出租">
-                        <input type="radio" ng-model="carInfo.isRented" value="0" title="未出租">
-                    </div>
+                            style="height: 30px;border-radius: 10px">
                 </div>
             </div>
         </div>
     </form>
+</div>
+
+<!--采购订单项弹窗-->
+<div id="checkPurOrderItem" ng-hide="purOrderItemHide">
+    <table class="layui-table">
+        <colgroup>
+            <!--<col width="20">-->
+            <col width="200">
+            <col width="200">
+            <col width="100">
+            <!--<col width="150">-->
+            <!--<col width="100">-->
+            <!--<col width="100">-->
+            <!--<col width="250">-->
+            <col>
+        </colgroup>
+        <thead>
+        <tr>
+            <!--<th><input type="checkbox" lay-skin="primary"></th>-->
+            <th>订单项编号</th>
+            <th>商品名称</th>
+            <th>采购价格</th>
+            <!--<th>商品图片</th>-->
+            <th>数量</th>
+            <!--<th>单位</th>-->
+            <!--<th>生产日期</th>-->
+            <!--<th>保质期</th>-->
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="purOrderItem in purOrderItemList">
+            <!--<td><input type="checkbox" lay-skin="primary"></td>-->
+            <td>{{purOrderItem.purOrderItemId}}</td>
+            <td>{{purOrderItem.product.prodName}}</td>
+            <td>{{purOrderItem.prodPrice}}</td>
+            <!--<td>{{purOrderItem.product.prodImg}}</td>-->
+            <td>{{purOrderItem.prodNum}}</td>
+            <!--<td>{{purOrderItem.product.prodUnit}}</td>-->
+            <!--<td>{{purOrderItem.product.productionDate | date:'yyyy-MM-dd'}}</td>-->
+            <!--<td>-->
+            <!--<span ng-if="purOrderItem.product.storageTime != null">-->
+            <!--{{purOrderItem.product.storageTime}}个月-->
+            <!--</span>-->
+            <!--<span ng-if="purOrderItem.product.storageTime == null">-->
+            <!--无-->
+            <!--</span>-->
+            <!--</td>-->
+        </tr>
+        </tbody>
+    </table>
 </div>
 
 <script type="text/javascript" th:src="@{/webjars/layui/2.4.5/layui.js}"></script>

@@ -6,5 +6,5 @@ import com.cfblj.carrental.model.CarInfo;
 import java.util.List;
 
 public interface CarInfoMapper extends BaseMapper<CarInfo> {
-    List<CarInfo> selectCarInfoList();
+    List<CarInfo> selectCarInfoList(CarInfo carInfo);
 }

@@ -89,11 +89,11 @@
                 <li class="layui-nav-item">
                     <a href="javascript:;"><i class="layui-icon">&#xe60a;</i>&nbsp;&nbsp;用户管理</a>
                     <dl class="layui-nav-child">
-                        <dd><a th:href="@{/product/product_list}" target="iframe">租户信息</a></dd>
-                            <a th:href="@{/tempRepSheet/tempRepProductDetails}" target="iframe">车主信息</a>
+                        <dd><a th:href="@{/user/renterList}" target="iframe">租户信息</a></dd>
+                            <a th:href="@{/user/carOwnerList}" target="iframe">车主信息</a>
                         <span >
                             <dd>
-                                <a th:href="@{/supplier/supplier_list}" target="iframe">代驾信息</a>
+                                <a th:href="@{/user/carDriverList}" target="iframe">代驾信息</a>
                             </dd>
                         </span>
                     </dl>
@@ -101,15 +101,15 @@
                 <li class="layui-nav-item">
                     <a href="javascript:;"><i class="layui-icon">&#xe668;</i>&nbsp;&nbsp;订单管理</a>
                     <dl class="layui-nav-child">
-                        <dd><a th:href="@{/sell/sellInfo_list}" target="iframe">订单信息</a></dd>
-                        <dd><a th:href="@{/sellItem/sellItem_list}" target="iframe">订单明细</a></dd>
+                        <dd><a th:href="@{/order/orderList}" target="iframe">订单信息</a></dd>
+                        <dd><a th:href="@{/order/orderDetailList}" target="iframe">订单明细</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item">
-                    <a href=""><i class="layui-icon">&#xe612;</i>品牌管理</a>
+                    <a th:href="@{/car/carBandList}" target="iframe"><i class="layui-icon">&#xe612;</i>品牌管理</a>
                 </li>
                 <li class="layui-nav-item">
-                    <a href=""><i class="layui-icon">&#xe612;</i>服务管理</a>
+                    <a th:href="@{/car/rentServiceList}" target="iframe"><i class="layui-icon">&#xe612;</i>服务管理</a>
                 </li>
                 <li class="layui-nav-item">
                     <a href=""><i class="layui-icon">&#xe612;</i>个人中心</a>

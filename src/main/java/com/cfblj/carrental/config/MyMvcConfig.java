@@ -22,18 +22,17 @@ public class MyMvcConfig extends WebMvcConfigurerAdapter {
                 //汽车管理
                 registry.addViewController("/car/carInfoList").setViewName("car/carinfolist.html");   //跳转到汽车信息页
                 registry.addViewController("/car/carAppointList").setViewName("car/carappointlist.html");   //跳转到汽车预约信息页
-                registry.addViewController("/car/carRentalList").setViewName("car/carrentallist.html");    //跳转到部门信息页
-                registry.addViewController("/supplier/supplier_list").setViewName("supplier/supplier_list.html");   //跳转到供应商信息页
-                registry.addViewController("/stock/stock_list").setViewName("admin/stock.html");   //跳转到仓库信息页
-                registry.addViewController("/category/category_list").setViewName("product/productCategory_list.html");   //跳转到商品分类信息页
-                registry.addViewController("/product/product_list").setViewName("product/product_list.html");   //跳转到商品信息页
-                registry.addViewController("/sell/sellInfo_list").setViewName("sell/sellInfo_list.html");   //跳转到销售信息页
-                registry.addViewController("/sellItem/sellItem_list").setViewName("sell/sellItem_list.html");   //跳转到销售明细页
-                registry.addViewController("/purchase/purchaseOrder_list").setViewName("purchase/purchaseOrder_list.html");   //跳转到采购订单页
-                registry.addViewController("/purOrderItem/purchaseOrderItem_list").setViewName("purchase/purchaseOrderItem_list.html");   //跳转到采购明细页
-                registry.addViewController("/tempRepSheet/tempRepProductDetails").setViewName("replenishment/tempRepProductDetails.html");  //跳转到商品补货页
-                registry.addViewController("/repSheet/repSheet_list").setViewName("replenishment/replenishmentSheet_list.html");  //跳转到商品补货单页
-                registry.addViewController("/reports/sellReport").setViewName("sellReport.html");  //跳转到商品补货单页
+                registry.addViewController("/car/carRentalList").setViewName("car/carrentallist.html");    //跳转到汽车租用信息页
+                registry.addViewController("/car/carBandList").setViewName("car/carband.html");   //跳转到仓库信息页
+                registry.addViewController("/car/rentServiceList").setViewName("car/rebtservice.html");   //跳转到商品分类信息页
+                registry.addViewController("/car/product_list").setViewName("product/product_list.html");   //跳转到商品信息页
+                //用户
+                registry.addViewController("/user/renterList").setViewName("user/renterlist.html");   //跳转到供应商信息页
+                registry.addViewController("/user/carOwnerList").setViewName("user/carownerlist.html");   //跳转到销售信息页
+                registry.addViewController("/user/carDriverList").setViewName("user/cardriverlist.html");   //跳转到销售明细页
+                //订单
+                registry.addViewController("/order/orderList").setViewName("orders/orderInfo.html");   //跳转到销售明细页
+                registry.addViewController("/order/orderDetailList").setViewName("orders/orderdetail.html");   //跳转到销售明细页
             }
         };
         return webMvcConfigurerAdapter;

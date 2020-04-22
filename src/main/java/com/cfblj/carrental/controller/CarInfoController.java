@@ -30,13 +30,14 @@ public class CarInfoController {
 
     /**
      * 分页查询所有车辆信息
+     * @param carInfo:搜索条件对象
      * @param curPage  当前页数
      * @param size  当前页显示数据条数
      * @return
      */
     @RequestMapping("/getCarInfoPage")
-    public Pages getCarInfoPage(int curPage, int size){
-        return carInfoService.getCarInfoPage(curPage, size);
+    public Pages getCarInfoPage(@RequestBody CarInfo carInfo, int curPage, int size){
+        return carInfoService.getCarInfoPage(carInfo, curPage, size);
     }
 
     /**

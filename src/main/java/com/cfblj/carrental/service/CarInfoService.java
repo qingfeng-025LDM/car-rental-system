@@ -9,7 +9,7 @@ import java.util.List;
 public interface CarInfoService extends IService<CarInfo> {
     List<CarInfo> getCarInfoList();
 
-    Pages getCarInfoPage(int currentPage, int rows);
+    Pages getCarInfoPage(CarInfo carInfo, int currentPage, int rows);
 
     void addCarInfo(CarInfo carInfo);
 

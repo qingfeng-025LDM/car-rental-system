@@ -1,9 +1,14 @@
 package com.cfblj.carrental.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.cfblj.carrental.exception.CustomException;
 import com.cfblj.carrental.mapper.CarAppointMapper;
+import com.cfblj.carrental.mapper.CarInfoMapper;
+import com.cfblj.carrental.mapper.UserMapper;
 import com.cfblj.carrental.model.CarAppoint;
+import com.cfblj.carrental.model.CarInfo;
+import com.cfblj.carrental.model.User;
 import com.cfblj.carrental.service.CarAppointService;
 import com.cfblj.carrental.utils.Pages;
 import com.github.pagehelper.Page;
@@ -13,10 +18,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.SimpleDateFormat;
+
 @Service
 public class CarAppointServiceImpl extends ServiceImpl<CarAppointMapper, CarAppoint> implements CarAppointService {
     @Autowired
     private CarAppointMapper carAppointMapper;
+    @Autowired
+    private CarInfoMapper carInfoMapper;
+    @Autowired
+    private UserMapper userMapper;
 
     /**
      * 分页查询车辆预约
@@ -25,9 +36,9 @@ public class CarAppointServiceImpl extends ServiceImpl<CarAppointMapper, CarAppo
      * @return
      */
     @Override
-    public Pages getCarAppointPage(int curPage, int size) {
+    public Pages getCarAppointPage(CarAppoint carAppoint, int curPage, int size) {
         PageHelper.startPage(curPage, size);
-        Page<CarAppoint> page = (Page<CarAppoint>)carAppointMapper.selectCarAppointList();
+        Page<CarAppoint> page = (Page<CarAppoint>)carAppointMapper.selectCarAppointList(carAppoint);
         return new Pages(page.getTotal(), page.getResult());
     }
 
@@ -41,10 +52,21 @@ public class CarAppointServiceImpl extends ServiceImpl<CarAppointMapper, CarAppo
         if (StringUtils.isBlank(id)){
             throw new CustomException("ID不能为空");
         }
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         CarAppoint carAppoint = carAppointMapper.selectById(id);
+        CarInfo carInfo = carInfoMapper.selectOne(new QueryWrapper<CarInfo>().eq("id", carAppoint.getCarId()));
+        if (carInfo != null){
+            carAppoint.setCarInfo(carInfo);
+        }
+        User user = userMapper.selectOne(new QueryWrapper<User>().eq("id", carAppoint.getUserId()));
+        if (user != null){
+            carAppoint.setUser(user);
+        }
         if (carAppoint == null){
             return new CarAppoint();
         }
+        sdf.format(carAppoint.getStartTime());
+        sdf.format(carAppoint.getEndTime());
         return carAppoint;
     }
 

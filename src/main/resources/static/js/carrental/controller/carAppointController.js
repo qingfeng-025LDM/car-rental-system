@@ -1,10 +1,11 @@
 app.controller('carAppointController', function ($scope, $controller, carAppointService) {
 
-    $controller('baseController', {$scope:$scope});
+    $controller('baseSearchController', {$scope:$scope});
 
-    //查询所有员工，带分页
+    //分页查询查询所有汽车预约信息
+    $scope.searchCarAppoint = {};
     $scope.findPage=function (currentPage, rows) {
-        carAppointService.getCarAppointPage(currentPage, rows).success(
+        carAppointService.getCarAppointPage(currentPage, rows, $scope.searchCarAppoint).success(
             function (response) {
                 $scope.list = response.rows;	//显示当前页数据
                 $scope.paginationConf.totalItems = response.sum;	//更新总记录数
@@ -17,14 +18,14 @@ app.controller('carAppointController', function ($scope, $controller, carAppoint
         carAppointService.getCarAppointById(id).success(
             function (response) {
                 if(response != null){
-                    $scope.carAppoint=response;
+                    $scope.carAppoint=response.data;
                 }else{
                     layer.msg("预约信息不存在", {icon: 2});
                 }
             }
         );
     }
-    //员工信息弹窗
+    //车辆预约信息弹窗
     $scope.editCarAppoint=function () {
         layui.use('layer', function () {
             var layer = layui.layer;
@@ -40,7 +41,6 @@ app.controller('carAppointController', function ($scope, $controller, carAppoint
                 content: $('#editOrAddPop'), //弹窗的内容
                 btn: ['保存','取消'],
                 btn1: function(index, layreo){
-                    $scope.saveEmployee();
                     $scope.toggle();    //修改ng-hide的值
                     layer.close(index);
                 },
@@ -57,7 +57,7 @@ app.controller('carAppointController', function ($scope, $controller, carAppoint
     //保存车辆预约信息
     $scope.saveCarAppoint=function () {
         var carAppointRes;
-        if($scope.employee.empId != null){
+        if($scope.carAppoint.id != null){
             carAppointRes = carAppointService.updateCarAppoint($scope.carAppoint); //修改
         }else{
             carAppointRes = carAppointService.addCarAppoint($scope.carAppoint);    //添加
@@ -74,75 +74,12 @@ app.controller('carAppointController', function ($scope, $controller, carAppoint
         );
     }
 
-    //删除员工
-    $scope.delEmployee=function (id) {
-        employeeService.delEmployee(id).success(
-            function (response) {
-                if(response.success){
-                    $scope.reloadList();
-                    layer.msg(response.msg, {icon: 1});
-                }else{
-                    layer.msg(response.msg, {icon: 2});
-                }
-            }
-        );
-    }
-    //单个删除询问
-    $scope.delEmpConfirm=function(id){
-        layer.confirm('是否删除？', {
-            btn: ['是', '否']
-        },function () {
-            $scope.delEmployee(id);
-        });
-    }
-
-    //批量删除
-    $scope.delEmployees=function () {
-        employeeService.delEmployees($scope.selectIds).success(
-            function (response) {
-                if(response.success){
-                    $scope.reloadList();
-                    layer.msg(response.msg, {icon: 1});
-                }else{
-                    layer.msg(response.msg, {icon: 2});
-                }
-            }
-        );
-    }
-    //批量删除询问
-    $scope.delEmpsConfirm=function(){
-        if ($scope.selectIds.length == 0){
-            layer.alert("请选择要删除的员工", {icon:0})
-        }else {
-            layer.confirm('是否删除？', {
-                btn: ['是', '否']
-            },function () {
-                $scope.delEmployees();
-            });
-        }
-    }
-
-    //员工性别
-    $scope.sex=['未知', '男', '女'];
-
-    // $scope.deptList=[]; //部门列表数组
     //获取部门列表
     $scope.getDepartmentList=function () {
         departmentService.getAllDepartment().success(
             function (response) {
                 $scope.departmentList=response;
 
-            }
-        );
-    }
-
-    //员工搜索
-    $scope.searchEmployee={};   //定义搜索对象
-    $scope.search=function(currentPage, rows){
-        employeeService.searchEmployee(currentPage, rows, $scope.searchEmployee).success(
-            function (response) {
-                $scope.list = response.rows;	//显示当前页数据
-                $scope.paginationConf.totalItems = response.sum;	//更新总记录数
             }
         );
     }

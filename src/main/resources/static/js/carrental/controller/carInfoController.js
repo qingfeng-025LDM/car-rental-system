@@ -1,6 +1,6 @@
 app.controller('carInfoController', function ($scope, $controller, carInfoService) {
 
-    $controller('baseController', {$scope:$scope});
+    $controller('baseSearchController', {$scope:$scope});
 
     //查询所有车辆信息
     $scope.getCarInfoList=function () {
@@ -25,8 +25,9 @@ app.controller('carInfoController', function ($scope, $controller, carInfoServic
     }
     
     //分页查询所有车辆信息
+    $scope.searchCarInfo = {};       //定义搜索对象
     $scope.findPage=function (curPage, size) {
-        carInfoService.getCarInfoPage(curPage, size).success(
+        carInfoService.getCarInfoPage(curPage, size, $scope.searchCarInfo).success(
             function (response) {
                 $scope.carInfoList = response.rows;	//显示当前页数据
                 $scope.paginationConf.totalItems = response.sum;	//更新总记录数

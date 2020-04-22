@@ -21,13 +21,14 @@ public class CarAppointController {
 
     /**
      * 分页查询汽车预约
+     * carAppoint:搜索对象
      * @param curPage
      * @param size
      * @return
      */
     @RequestMapping("/getCarAppointPage")
-    public Pages getCarAppointPage(int curPage, int size){
-        return carAppointService.getCarAppointPage(curPage, size);
+    public Pages getCarAppointPage(@RequestBody CarAppoint carAppoint, int curPage, int size){
+        return carAppointService.getCarAppointPage(carAppoint, curPage, size);
     }
 
     /**

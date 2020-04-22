@@ -1,6 +1,8 @@
 package com.cfblj.carrental.model;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.util.Date;
@@ -8,16 +10,22 @@ import java.util.Date;
 @TableName("order_detail")
 public class OrderDetail {
 
+    @TableId(type = IdType.UUID)
     private String id;
+
     @TableField("orderId")
     private String order_id;
+
     @TableField("rentPrice")
     private Double rent_price;
+
     @TableField("personNum")
     private int person_num;
+
     private Double duration;
     @TableField("startTime")
     private Date start_time;
+
     @TableField("endTime")
     private Date end_time;
 

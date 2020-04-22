@@ -61,6 +61,9 @@ public class CarInfo implements Serializable {
     @TableField("city")
     private String city;        //所属城市
 
+    @TableField(exist = false)
+    private User carOwner;      //车主信息
+
     public String getId() {
         return id;
     }
@@ -179,5 +182,13 @@ public class CarInfo implements Serializable {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public User getCarOwner() {
+        return carOwner;
+    }
+
+    public void setCarOwner(User carOwner) {
+        this.carOwner = carOwner;
     }
 }
