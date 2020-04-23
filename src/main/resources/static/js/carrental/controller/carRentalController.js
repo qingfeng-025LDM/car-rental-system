@@ -1,34 +1,27 @@
 app.controller('stockController', function ($scope, $controller, carRentalService) {
 
-    $controller('baseController', {$scope:$scope});
+    $controller('baseSearchController', {$scope:$scope});
 
-    //查询所有仓库信息
-    $scope.getStockList=function(){
-        carRentalService.getStockList().success(
-            function (response) {
-                $scope.stockList = response;
-            }
-        );
-    }
 
     //分页查询所有汽车租用信息
+    $scope.searchCarRental={};  //搜索对象
     $scope.findPage=function (curPage, size) {
-        carRentalService.getCarRentalPage(curPage, size).success(
+        carRentalService.getCarRentalPage(curPage, size, $scope.searchCarRental).success(
             function (response) {
-                $scope.list = response.rows;	//显示当前页数据
+                $scope.carRentalList = response.rows;	//显示当前页数据
                 $scope.paginationConf.totalItems = response.sum;	//更新总记录数
             }
         );
     }
 
-    //根据id查询仓库信息
+    //根据id查询车辆租用信息
     $scope.getCarRentalById=function (id) {
         carRentalService.getCarRentalById(id).success(
             function (response) {
                 if(response != null){
-                    $scope.stock=response;
+                    $scope.carRental=response.data;
                 }else{
-                    layer.msg("仓库不存在", {icon: 2});
+                    layer.msg("信息不存在", {icon: 2});
                 }
             }
         );
@@ -45,7 +38,7 @@ app.controller('stockController', function ($scope, $controller, carRentalServic
                 skin: 'layui-layer-rim', //加上边框
                 area: ['600px', '360px'],
                 shadeClose: false, //关闭遮罩关闭
-                content: $('#edit'), //弹窗的内容
+                content: $('#checkPop'), //弹窗的内容
                 btn: ['保存','取消'],
                 btn1: function(index, layreo){
                     $scope.toggle();    //修改ng-hide的值
@@ -61,9 +54,7 @@ app.controller('stockController', function ($scope, $controller, carRentalServic
         })
     }
 
-    $scope.myStockStatus=true;
-
-   //仓库状态
-    $scope.status=['关闭', '开启'];
+   //出租状态
+    $scope.status=['未归还', '已归还', '正在租用'];
 
 });

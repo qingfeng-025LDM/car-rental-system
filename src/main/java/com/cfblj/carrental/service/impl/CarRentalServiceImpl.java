@@ -19,9 +19,9 @@ public class CarRentalServiceImpl extends ServiceImpl<CarRentalMapper, CarRental
     private CarRentalMapper carRentalMapper;
 
     @Override
-    public Pages getCarRentalPage(int curPage, int size) {
+    public Pages getCarRentalPage(CarRental carRental, int curPage, int size) {
         PageHelper.startPage(curPage, size);
-        Page<CarRental> page = (Page<CarRental>)carRentalMapper.selectCarRentalList();
+        Page<CarRental> page = (Page<CarRental>)carRentalMapper.selectCarRentalList(carRental);
         return new Pages(page.getTotal(), page.getResult());
     }
 

@@ -1,8 +1,8 @@
 app.service('carRentalService', function ($http) {
 
 
-    this.getCarRentalPage=function(curPage, size){
-        return $http.get('/carRental/getCarRentalPage?curPage='+curPage+'&size='+size);
+    this.getCarRentalPage=function(curPage, size, searchCarRental){
+        return $http.post('/carRental/getCarRentalPage?curPage='+curPage+'&size='+size, searchCarRental);
     }
 
     this.getCarRentalById=function (id) {

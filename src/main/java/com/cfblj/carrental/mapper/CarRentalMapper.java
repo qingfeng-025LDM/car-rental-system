@@ -6,5 +6,5 @@ import com.cfblj.carrental.model.CarRental;
 import java.util.List;
 
 public interface CarRentalMapper extends BaseMapper<CarRental> {
-    List<CarRental> selectCarRentalList();
+    List<CarRental> selectCarRentalList(CarRental carRental);
 }

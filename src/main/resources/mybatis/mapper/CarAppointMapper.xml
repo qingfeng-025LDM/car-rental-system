@@ -3,7 +3,7 @@
 <mapper namespace="com.cfblj.carrental.mapper.CarAppointMapper">
 
     <select id="selectCarAppointList" resultType="com.cfblj.carrental.model.CarAppoint" parameterType="com.cfblj.carrental.model.CarAppoint">
-        select a.*, b.id as 'carInfo.id', b.car_name as 'carInfo.carName',
+        select a.*, b.id as 'carInfo.id', b.car_name as 'carInfo.carName', b.car_xh as 'carInfo.carXh'
           b.license_plate_num as 'carInfo.licensePlateNum', c.id as 'user.id', c.name as 'user.name'
          from car_appoint a
         left join car_info b on a.car_id = b.id

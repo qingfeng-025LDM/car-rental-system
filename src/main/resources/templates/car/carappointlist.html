@@ -92,7 +92,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="carAppoint in list" ng-click="updateSelectIds($event, emp.empId)">
+        <tr ng-repeat="carAppoint in list">
             <td><input type="checkbox" name="" lay-skin="primary"></td>
             <td>{{carAppoint.carInfo.carName}}</td>
             <td>{{carAppoint.carInfo.carXh}}</td>
@@ -131,6 +131,14 @@
                             <input type="text" id="carnumber" autocomplete="off" class="layui-input"
                                    lay-verify="required" ng-model="carAppoint.carInfo.licensePlateNum"
                                     style="height: 30px;border-radius: 10px">
+                        </div>
+                    </div>
+                    <div class="layui-form-item magt3">
+                        <label class="layui-form-label">车辆型号:</label>
+                        <div class="layui-input-block" style="padding: 5px">
+                            <input type="text" id="carXh" autocomplete="off" class="layui-input"
+                                   lay-verify="required" ng-model="carAppoint.carInfo.carXh"
+                                   style="height: 30px;border-radius: 10px">
                         </div>
                     </div>
                     <div class="layui-form-item">
