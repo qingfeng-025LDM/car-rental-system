@@ -27,7 +27,7 @@ public class CarRental implements Serializable {
     private Date end_time;
 
     @TableField("user_id")
-    private String user_id;
+    private String userId;
 
     @TableField("status")
     private String status;
@@ -70,12 +70,12 @@ public class CarRental implements Serializable {
         this.end_time = end_time;
     }
 
-    public String getUser_id() {
-        return user_id;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setUser_id(String user_id) {
-        this.user_id = user_id;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getStatus() {

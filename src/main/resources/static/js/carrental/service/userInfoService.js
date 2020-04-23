@@ -1,16 +1,10 @@
 app.service('userInfoService', function ($http) {
-    this.getUserPage=function (curPage, size) {
-        return $http.get('/user/getUserPage?curPage='+curPage+'&size='+size);
+    this.getUserInfoPage=function (curPage, size, searchUser) {
+        return $http.post('/user/getUserInfoPage?curPage='+curPage+'&size='+size, searchUser);
     }
 
-    this.getUserById=function (id) {
-        return $http.get('/user/getUserById?id='+id);
-    }
-
-
-
-    this.updateCategory=function (category) {
-        return $http.post('/category/updateCategory', category);
+    this.getUserInfoById=function (id) {
+        return $http.get('/user/getUserInfoById?id='+id);
     }
 
     this.delCategory=function (id) {

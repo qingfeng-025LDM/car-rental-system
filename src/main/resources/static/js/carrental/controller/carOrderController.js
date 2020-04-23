@@ -2,10 +2,11 @@ app.controller('carOrderController', function ($scope, $controller, carOrderServ
 
     $controller('baseSearchController', {$scope:$scope});
 
+    $scope.searchOrder={};
     $scope.findPage=function (currentPage, rows) {
-        carOrderService.getAllPurchaseOrderPage(currentPage, rows).success(
+        carOrderService.getOrderPage(currentPage, rows, $scope.searchOrder).success(
             function (response) {
-                $scope.list = response.rows;	//显示当前页数据
+                $scope.orderList = response.rows;	//显示当前页数据
                 $scope.paginationConf.totalItems = response.sum;	//更新总记录数
             }
         );

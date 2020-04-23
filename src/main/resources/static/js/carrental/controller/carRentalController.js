@@ -1,4 +1,4 @@
-app.controller('stockController', function ($scope, $controller, carRentalService) {
+app.controller('carRentalController', function ($scope, $controller, carRentalService) {
 
     $controller('baseSearchController', {$scope:$scope});
 

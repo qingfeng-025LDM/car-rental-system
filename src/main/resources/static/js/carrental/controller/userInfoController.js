@@ -1,56 +1,37 @@
-app.controller('userInfoController', function ($scope, $controller, productCategoryService) {
+app.controller('userInfoController', function ($scope, $controller, userInfoService) {
 
-    $controller('baseController', {$scope:$scope});
+    $controller('baseSearchController', {$scope:$scope});
 
+    $scope.searchUser = {};
     $scope.findPage=function (currentPage, rows) {
-        productCategoryService.getAllCategoryPage(currentPage, rows).success(
+        userInfoService.getUserInfoPage(currentPage, rows, $scope.searchUser).success(
             function (response) {
-                $scope.list = response.rows;//显示当前页数据
+                $scope.userList = response.rows;//显示当前页数据
                 $scope.paginationConf.totalItems = response.sum;	//更新总记录数
             }
         );
     }
 
-    //根据id查询商品分类信息
-    $scope.getCategoryById=function(id){
-        productCategoryService.getCategoryById(id).success(
+    //根据id查询用户信息
+    $scope.getUserInfoById=function(id){
+        userInfoService.getUserInfoById(id).success(
             function (response) {
                 if(response != null){
-                    $scope.category = response;
+                    $scope.userInfo = response.data;
                 }else{
-                    layer.alert("商品分类不存在！", {icon: 2});
+                    layer.alert("用户不存在！", {icon: 2});
                 }
             }
         );
     }
 
-    //保存商品分类
-    $scope.saveCategory=function () {
-        var categoryMethod;
-        if($scope.category.categoryId != null){
-            categoryMethod = productCategoryService.updateCategory($scope.category);    //修改
-        }else{
-            $scope.category.parentId=$scope.parentId;       //将查询出的parentId赋给要添加的分类的parentId
-            categoryMethod = productCategoryService.addCategory($scope.category);       //添加
-        }
-        categoryMethod.success(
-            function (response) {
-                if(response.success){
-                    $scope.findByParentId($scope.parentId);     //完成后重新加载
-                    layer.msg(response.msg, {icon:1});
-                }else{
-                    layer.msg(response.msg, {icon:2});
-                }
-            }
-        );
-    }
-    //商品分类信息弹窗
-    $scope.editCategory=function () {
+    //用户信息弹窗
+    $scope.editUser=function () {
         layui.use('layer', function () {
             var layer = layui.layer;
 
             layer.open({
-                title: ['商品分类信息', 'font-size:20px'],
+                title: ['用户信息', 'font-size:20px'],
                 type: 1,
                 maxmin: true,
                 skin: 'layui-layer-rim', //加上边框
@@ -59,7 +40,6 @@ app.controller('userInfoController', function ($scope, $controller, productCateg
                 content: $('#edit'), //弹窗的内容
                 btn: ['保存','取消'],
                 btn1: function(index, layreo){
-                    $scope.saveCategory();
                     $scope.toggle();    //修改ng-hide的值
                     layer.close(index);
                 },
@@ -74,7 +54,7 @@ app.controller('userInfoController', function ($scope, $controller, productCateg
         });
     }
 
-    //删除分类
+    //删除用户
     $scope.delCategory=function (id) {
         productCategoryService.delCategory(id).success(
             function (response) {
@@ -159,5 +139,9 @@ app.controller('userInfoController', function ($scope, $controller, productCateg
 
         $scope.findByParentId(p_category.categoryId);
     }
+
+    $scope.status=['正常', '禁用', '异常']
+    $scope.sex=['女', '男']
+    $scope.isMember=['否', '是']
 
 });

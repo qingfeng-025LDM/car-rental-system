@@ -2,4 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cfblj.carrental.mapper.UserMapper">
 
+    <select id="selectUserInfo" resultType="com.cfblj.carrental.model.User" parameterType="com.cfblj.carrental.model.User">
+        select * from user_info
+        <where>
+            <if test="name != null and name != ''">
+                and name like '%${name}%'
+            </if>
+            <if test="sex != null and sex != ''">
+                and name = #{sex}
+            </if>
+            <if test="address != null and address != ''">
+                and address like '%${address}%'
+            </if>
+            <if test="phone != null and phone != ''">
+                and phone like '%${phone}%'
+            </if>
+        </where>
+    </select>
+
 </mapper>

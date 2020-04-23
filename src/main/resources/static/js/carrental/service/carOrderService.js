@@ -1,10 +1,10 @@
 app.service('carOrderService', function ($http) {
-    this.getAllPurchaseOrderPage=function (currentPage, rows) {
-        return $http.get('/purchase/purchaseOrderPage?currentPage='+currentPage+'&rows='+rows);
+    this.getOrderPage=function (currentPage, rows, searchOrder) {
+        return $http.post('/order/getOrderPage?currentPage='+currentPage+'&rows='+rows, searchOrder);
     }
 
     this.searchPurchaseOrder=function (currentPage, rows, searchPurOrder) {
-        return $http.post('/purchase/searchPurOrder?currentPage='+currentPage+'&rows='+rows, searchPurOrder);
+        return $http.post('/order/searchPurOrder?currentPage='+currentPage+'&rows='+rows, searchPurOrder);
     }
 
     //生成采购订单

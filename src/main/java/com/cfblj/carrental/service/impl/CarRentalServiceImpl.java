@@ -1,9 +1,15 @@
 package com.cfblj.carrental.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.cfblj.carrental.exception.CustomException;
+import com.cfblj.carrental.mapper.CarInfoMapper;
 import com.cfblj.carrental.mapper.CarRentalMapper;
+import com.cfblj.carrental.mapper.UserMapper;
+import com.cfblj.carrental.model.CarAppoint;
+import com.cfblj.carrental.model.CarInfo;
 import com.cfblj.carrental.model.CarRental;
+import com.cfblj.carrental.model.User;
 import com.cfblj.carrental.service.CarRentalService;
 import com.cfblj.carrental.utils.Pages;
 import com.github.pagehelper.Page;
@@ -17,6 +23,10 @@ public class CarRentalServiceImpl extends ServiceImpl<CarRentalMapper, CarRental
 
     @Autowired
     private CarRentalMapper carRentalMapper;
+    @Autowired
+    private CarInfoMapper   carInfoMapper;
+    @Autowired
+    private UserMapper      userMapper;
 
     @Override
     public Pages getCarRentalPage(CarRental carRental, int curPage, int size) {
@@ -31,7 +41,17 @@ public class CarRentalServiceImpl extends ServiceImpl<CarRentalMapper, CarRental
             throw new CustomException("id不能为空");
         }
         CarRental carRental = carRentalMapper.selectById(id);
-
-        return null;
+        CarInfo carInfo = carInfoMapper.selectOne(new QueryWrapper<CarInfo>().eq("id", carRental.getCarId()));
+        if (carInfo != null){
+            carRental.setCarInfo(carInfo);
+        }
+        User user = userMapper.selectOne(new QueryWrapper<User>().eq("id", carRental.getUserId()));
+        if (user != null){
+            carRental.setUser(user);
+        }
+        if (carRental == null){
+            return new CarRental();
+        }
+        return carRental;
     }
 }

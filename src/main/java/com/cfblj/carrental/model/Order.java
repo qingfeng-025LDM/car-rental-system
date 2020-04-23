@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @TableName("car_order")
 public class Order {
@@ -22,10 +23,8 @@ public class Order {
     private String userId;
 
     @TableField("create_time")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private String createTime;
-
-    @TableField("car_id")
-    private String carId;
 
     public String getId() {
         return id;
@@ -75,11 +74,4 @@ public class Order {
         this.createTime = createTime;
     }
 
-    public String getCarId() {
-        return carId;
-    }
-
-    public void setCarId(String carId) {
-        this.carId = carId;
-    }
 }
