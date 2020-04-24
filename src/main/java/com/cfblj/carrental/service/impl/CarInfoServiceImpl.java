@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -58,6 +59,7 @@ public class CarInfoServiceImpl extends ServiceImpl<CarInfoMapper, CarInfo> impl
         if (carInfo == null){
             throw new CustomException("添加的车辆信息中无任何数据");
         }
+        carInfo.setReleaseTime(new Date());
         carInfoMapper.insert(carInfo);
     }
 

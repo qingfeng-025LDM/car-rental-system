@@ -14,9 +14,9 @@
     <link th:href="@{/angularjs/pagination.css}" rel="stylesheet">
 
     <script th:src="@{/js/carrental/base_pagination.js}" type="text/javascript"></script>
-    <script th:src="@{/js/carrental/service/carInfoService.js}" type="text/javascript"></script>
+    <script th:src="@{/js/carrental/service/carOrderService.js}" type="text/javascript"></script>
     <script th:src="@{/js/carrental/controller/baseSearchController.js}" type="text/javascript"></script>
-    <script th:src="@{/js/carrental/controller/carInfoController.js}" type="text/javascript"></script>
+    <script th:src="@{/js/carrental/controller/carOrderController.js}" type="text/javascript"></script>
 </head>
 <body ng-app="carrental" ng-controller="carOrderController">
 <form class="layui-form" method="post" id="searchFrm">
@@ -29,14 +29,14 @@
             </div>
         </div>
         <div class="layui-inline">
-            <label class="layui-form-label">订单起始时间:</label>
+            <label class="layui-form-label">开始时间:</label>
             <div class="layui-input-inline" style="padding: 5px">
                 <input type="text" name="cartype" autocomplete="off" class="layui-input layui-input-inline"
                        style="height: 30px;border-radius: 10px">
             </div>
         </div>
         <div class="layui-inline">
-            <label class="layui-form-label">订单结束时间:</label>
+            <label class="layui-form-label">结束时间:</label>
             <div class="layui-input-inline" style="padding: 5px">
                 <input type="text" name="color" autocomplete="off" class="layui-input layui-input-inline"
                        style="height: 30px;border-radius: 10px">

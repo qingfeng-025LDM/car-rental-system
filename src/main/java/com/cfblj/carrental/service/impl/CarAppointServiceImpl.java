@@ -52,7 +52,6 @@ public class CarAppointServiceImpl extends ServiceImpl<CarAppointMapper, CarAppo
         if (StringUtils.isBlank(id)){
             throw new CustomException("ID不能为空");
         }
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         CarAppoint carAppoint = carAppointMapper.selectById(id);
         CarInfo carInfo = carInfoMapper.selectOne(new QueryWrapper<CarInfo>().eq("id", carAppoint.getCarId()));
         if (carInfo != null){
@@ -65,8 +64,6 @@ public class CarAppointServiceImpl extends ServiceImpl<CarAppointMapper, CarAppo
         if (carAppoint == null){
             return new CarAppoint();
         }
-        sdf.format(carAppoint.getStartTime());
-        sdf.format(carAppoint.getEndTime());
         return carAppoint;
     }
 

@@ -7,7 +7,7 @@
        b.car_xh as 'carInfo.carXh', c.id as 'user.id', c.name as 'user.name'
       from car_rental a
       left join car_info b on b.id = a.car_id
-      left join user_info c on c.id a.user_id
+      left join user_info c on c.id = a.user_id
       <where>
           <if test="carInfo != null">
               <if test="carInfo.licensePlateNum != null and carInfo.licensePlateNum !=''">

@@ -26,6 +26,9 @@ public class Order {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private String createTime;
 
+    @TableField(exist = false)
+    private User user;
+
     public String getId() {
         return id;
     }
@@ -74,4 +77,11 @@ public class Order {
         this.createTime = createTime;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

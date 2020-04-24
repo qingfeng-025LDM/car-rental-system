@@ -1,6 +1,6 @@
 app.service('carOrderService', function ($http) {
-    this.getOrderPage=function (currentPage, rows, searchOrder) {
-        return $http.post('/order/getOrderPage?currentPage='+currentPage+'&rows='+rows, searchOrder);
+    this.getOrderPage=function (curPage, size, searchOrder) {
+        return $http.post('/order/getOrderPage?curPage='+curPage+'&size='+size, searchOrder);
     }
 
     this.searchPurchaseOrder=function (currentPage, rows, searchPurOrder) {

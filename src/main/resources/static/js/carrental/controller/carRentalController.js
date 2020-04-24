@@ -36,17 +36,17 @@ app.controller('carRentalController', function ($scope, $controller, carRentalSe
                 type: 1,
                 maxmin: true,
                 skin: 'layui-layer-rim', //加上边框
-                area: ['600px', '360px'],
+                area: ['800px', '500px'],
                 shadeClose: false, //关闭遮罩关闭
                 content: $('#checkPop'), //弹窗的内容
-                btn: ['保存','取消'],
-                btn1: function(index, layreo){
-                    $scope.toggle();    //修改ng-hide的值
-                    layer.close(index);
-                },
-                btn2: function (index, layero) {
-                    $scope.toggle();
-                },
+                // btn: ['保存','取消'],
+                // btn1: function(index, layreo){
+                //     $scope.toggle();    //修改ng-hide的值
+                //     layer.close(index);
+                // },
+                // btn2: function (index, layero) {
+                //     $scope.toggle();
+                // },
                 cancel: function () {
                     $scope.toggle();
                 }

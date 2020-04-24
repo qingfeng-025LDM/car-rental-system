@@ -3,8 +3,8 @@ app.controller('carOrderController', function ($scope, $controller, carOrderServ
     $controller('baseSearchController', {$scope:$scope});
 
     $scope.searchOrder={};
-    $scope.findPage=function (currentPage, rows) {
-        carOrderService.getOrderPage(currentPage, rows, $scope.searchOrder).success(
+    $scope.findPage=function (curPage, size) {
+        carOrderService.getOrderPage(curPage, size, $scope.searchOrder).success(
             function (response) {
                 $scope.orderList = response.rows;	//显示当前页数据
                 $scope.paginationConf.totalItems = response.sum;	//更新总记录数
@@ -67,7 +67,7 @@ app.controller('carOrderController', function ($scope, $controller, carOrderServ
         $scope.purOrderItemHide=!$scope.purOrderItemHide;
     }
 
-    //销售订单状态
-    $scope.status=['未完成', '已完成', '已过期'];
+    //订单状态
+    $scope.status=['未付款', '已付款', '交易完成', '交易异常'];
 
 })

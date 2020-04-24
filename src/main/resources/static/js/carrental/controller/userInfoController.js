@@ -18,6 +18,7 @@ app.controller('userInfoController', function ($scope, $controller, userInfoServ
             function (response) {
                 if(response != null){
                     $scope.userInfo = response.data;
+                    layui.alert(userInfo)
                 }else{
                     layer.alert("用户不存在！", {icon: 2});
                 }
@@ -35,9 +36,9 @@ app.controller('userInfoController', function ($scope, $controller, userInfoServ
                 type: 1,
                 maxmin: true,
                 skin: 'layui-layer-rim', //加上边框
-                area: ['600px', '350px'],
+                area: ['800px', '550px'],
                 shadeClose: false, //关闭遮罩关闭
-                content: $('#edit'), //弹窗的内容
+                content: $('#editOrAddPop'), //弹窗的内容
                 btn: ['保存','取消'],
                 btn1: function(index, layreo){
                     $scope.toggle();    //修改ng-hide的值

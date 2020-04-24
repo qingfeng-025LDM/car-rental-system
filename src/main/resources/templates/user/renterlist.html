@@ -31,14 +31,14 @@
         <div class="layui-inline">
             <label class="layui-form-label">性别:</label>
             <div class="layui-input-inline" style="padding: 5px">
-                <input type="text" ng-model="searchUser.name" autocomplete="off" class="layui-input layui-input-inline"
+                <input type="text" ng-model="searchUser.sex" autocomplete="off" class="layui-input layui-input-inline"
                        style="height: 30px;border-radius: 10px">
             </div>
         </div>
         <div class="layui-inline">
             <label class="layui-form-label">地址:</label>
             <div class="layui-input-inline" style="padding: 5px">
-                <input type="text" ng-model="searchUser.name" autocomplete="off" class="layui-input layui-input-inline"
+                <input type="text" ng-model="searchUser.address" autocomplete="off" class="layui-input layui-input-inline"
                        style="height: 30px;border-radius: 10px">
             </div>
         </div>
@@ -47,15 +47,15 @@
         <div class="layui-inline">
             <label class="layui-form-label">电话号码:</label>
             <div class="layui-input-inline" style="padding: 5px">
-                <input type="text" ng-model="searchUser.name" autocomplete="off" class="layui-input layui-input-inline"
+                <input type="text" ng-model="searchUser.phone" autocomplete="off" class="layui-input layui-input-inline"
                         style="height: 30px;border-radius: 10px">
             </div>
         </div>
         <div class="layui-inline">
             <label class="layui-form-label">是否会员:</label>
             <div class="layui-input-inline">
-                <input type="radio" ng-model="searchUser.name" th:value="1" title="是">
-                <input type="radio" ng-model="searchUser.name" th:value="0" title="否">
+                <input type="radio" ng-model="searchUser.isMember" th:value="1" title="是">
+                <input type="radio" ng-model="searchUser.isMember" th:value="0" title="否">
             </div>
             <button type="button"
                     class="layui-btn layui-btn-normal layui-icon layui-icon-search layui-btn-radius layui-btn-sm"
@@ -78,8 +78,8 @@
             <col width="20">
             <col width="150">
             <col width="150">
-            <col width="100">
-            <col width="80">
+            <col width="150">
+            <col width="120">
             <col width="150">
             <col width="100">
             <col>
@@ -106,7 +106,7 @@
             <td>{{user.birthday}}</td>
             <td>{{status[user.status]}}</td>
             <td>
-                <button class="layui-btn layui-btn-xs" ng-click="editUser();getCarInfoById(carInfo.id);toggle()"><i class="layui-icon">&#xe642;</i>查看详情</button>
+                <button class="layui-btn layui-btn-xs" ng-click="editUser();getUserInfoById(user.id);toggle()"><i class="layui-icon">&#xe642;</i>查看详情</button>
                 <button class="layui-btn layui-btn-danger layui-btn-xs" ng-click="delCarConfirm(carInfo.id)"><i class="layui-icon">&#xe640;</i>禁用</button>
             </td>
         </tr>
