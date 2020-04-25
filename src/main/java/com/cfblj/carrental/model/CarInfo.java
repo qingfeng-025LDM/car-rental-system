@@ -52,7 +52,7 @@ public class CarInfo implements Serializable {
     private Date releaseTime;       //发布时间
 
     @TableField("car_status")
-    private String carStatus;       //汽车状态(0禁止出租、1正常、2正在维修，3已删除)
+    private String carStatus;       //汽车状态(0禁止出租、1正常、2正在维修，3已删除,4已出租)
 
     @TableField("image")
     private String image;       //图片

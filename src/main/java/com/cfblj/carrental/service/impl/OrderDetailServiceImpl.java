@@ -7,7 +7,9 @@ import com.cfblj.carrental.model.Order;
 import com.cfblj.carrental.model.OrderDetail;
 import com.cfblj.carrental.service.OrderDetailService;
 import com.cfblj.carrental.service.OrderService;
+import org.springframework.stereotype.Service;
 
+@Service
 public class OrderDetailServiceImpl extends ServiceImpl<OrderDetailMapper, OrderDetail> implements OrderDetailService {
 
 }
