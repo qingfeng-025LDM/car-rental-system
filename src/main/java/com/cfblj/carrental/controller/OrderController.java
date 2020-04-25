@@ -2,15 +2,19 @@ package com.cfblj.carrental.controller;
 
 import cn.hutool.core.date.DateTime;
 import com.cfblj.carrental.exception.CustomException;
+import com.cfblj.carrental.model.CarInfo;
 import com.cfblj.carrental.model.Order;
 import com.cfblj.carrental.model.OrderDetail;
 import com.cfblj.carrental.model.User;
+import com.cfblj.carrental.service.CarInfoService;
+import com.cfblj.carrental.service.OrderDetailService;
 import com.cfblj.carrental.service.OrderService;
 import com.cfblj.carrental.service.UserService;
 import com.cfblj.carrental.utils.Pages;
 import com.cfblj.carrental.utils.ReturnObject;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +28,10 @@ public class OrderController {
 
     @Autowired
     private OrderService orderService;
+    @Autowired
+    private OrderDetailService orderDetailService;
+    @Autowired
+    private CarInfoService carInfoService;
 
     @RequestMapping("/getOrderList")
     public List<Order> getOrderList(){
@@ -32,22 +40,20 @@ public class OrderController {
     }
 
     @RequestMapping("/creat")
-    public boolean regist(Order order){
+    @Transactional
+    public void creat(Order order, OrderDetail orderDetail){
         //生成唯一orderNUm
         DateTime dateTime = new DateTime();
         String orderNum = dateTime.getTime() + "";
         order.setOrderNum(orderNum);
-        boolean save = orderService.save(order);
+        orderService.save(order);
+        orderDetailService.save(orderDetail);
+        CarInfo carInfoById = carInfoService.getCarInfoById(orderDetail.getCarId());
+        carInfoById.setCarStatus("4");
+        carInfoService.updateCarInfo(carInfoById);
 
-        return save;
     }
 
-    public static void main(String[] args) {
-
-        DateTime dateTime = new DateTime();
-        System.out.println(dateTime.getTime());
-        System.out.println(dateTime.getTimeZone());
-    }
 
     /**
      * 分页查询
