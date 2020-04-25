@@ -54,8 +54,9 @@
         <div class="layui-inline">
             <label class="layui-form-label">是否会员:</label>
             <div class="layui-input-inline">
-                <input type="radio" ng-model="searchUser.isMember" th:value="1" title="是">
-                <input type="radio" ng-model="searchUser.isMember" th:value="0" title="否">
+                <select ng-model="searchUser.isMember">
+                    <option ng-repeat="x in isMember" value="{{$index}}">{{x}}</option>
+                </select>
             </div>
             <button type="button"
                     class="layui-btn layui-btn-normal layui-icon layui-icon-search layui-btn-radius layui-btn-sm"

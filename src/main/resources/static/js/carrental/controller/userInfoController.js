@@ -4,6 +4,7 @@ app.controller('userInfoController', function ($scope, $controller, userInfoServ
 
     $scope.searchUser = {};
     $scope.findPage=function (currentPage, rows) {
+        console.log($scope.searchUser);
         userInfoService.getUserInfoPage(currentPage, rows, $scope.searchUser).success(
             function (response) {
                 $scope.userList = response.rows;//显示当前页数据
@@ -18,7 +19,6 @@ app.controller('userInfoController', function ($scope, $controller, userInfoServ
             function (response) {
                 if(response != null){
                     $scope.userInfo = response.data;
-                    layui.alert(userInfo)
                 }else{
                     layer.alert("用户不存在！", {icon: 2});
                 }
@@ -39,14 +39,6 @@ app.controller('userInfoController', function ($scope, $controller, userInfoServ
                 area: ['800px', '550px'],
                 shadeClose: false, //关闭遮罩关闭
                 content: $('#editOrAddPop'), //弹窗的内容
-                btn: ['保存','取消'],
-                btn1: function(index, layreo){
-                    $scope.toggle();    //修改ng-hide的值
-                    layer.close(index);
-                },
-                btn2: function (index, layero) {
-                    $scope.toggle();
-                },
                 cancel: function () {
                     $scope.toggle();
                 }
@@ -101,44 +93,6 @@ app.controller('userInfoController', function ($scope, $controller, userInfoServ
                 $scope.delCategories();
             });
         }
-    }
-
-    //上级分类id
-    $scope.parentId=0;
-    //根据上一级id查询分类
-    $scope.findByParentId=function (parentId) {
-
-        $scope.parentId=parentId;   //记住上一级分类id
-
-        productCategoryService.findByParentId(parentId).success(
-            function (response) {
-                $scope.cateList=response;
-            }
-        );
-    }
-
-    //商品分类级别
-    $scope.level=1;
-    //设置分类级别
-    $scope.setLevel=function (value) {
-        $scope.level=value;
-    }
-
-    //选择分类级别
-    $scope.selectCateLevel=function (p_category) {
-        if ($scope.level == 1){
-            $scope.cateLevel_1 = null;
-            $scope.cateLevel_2 = null;
-        }
-        if ($scope.level == 2){
-            $scope.cateLevel_1 = p_category;
-            $scope.cateLevel_2 = null;
-        }
-        if ($scope.level == 3){
-            $scope.cateLevel_2 = p_category;
-        }
-
-        $scope.findByParentId(p_category.categoryId);
     }
 
     $scope.status=['正常', '禁用', '异常']
