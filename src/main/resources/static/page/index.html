@@ -63,6 +63,7 @@
   <script src="https://unpkg.com/vue/dist/vue.js"></script>
   <!-- import JavaScript -->
   <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script>
     new Vue({
       el: '#app',
@@ -72,7 +73,8 @@
 			   formInline: {
 					user: '',
 					region: ''
-				}
+				},
+				list: []
             };
       },
 	  methods:{
@@ -96,6 +98,17 @@
 		 onSubmit() {
 			console.log('submit!');
 		  }
+	  },
+	  mounted() {
+	  	axios.get('https://192.16.106.140:8099/user/get', {
+	  	    params: {
+	  	      id: 1
+	  	    }
+	  	  })
+	  	  .then(function (response) {
+			this.list = response.data
+	  	    console.log(response);
+	  	  })
 	  }
     })
   </script>
