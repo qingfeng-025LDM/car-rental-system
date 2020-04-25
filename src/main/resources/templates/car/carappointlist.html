@@ -65,9 +65,6 @@
 </form>
 <!--数据表格-->
 <div class="empTable">
-    <!--<button class="layui-btn" ng-click="delCarsConfirm()">-->
-        <!--<i class="layui-icon">&#xe640;</i> 批量删除-->
-    <!--</button>-->
     <table class="layui-table">
         <colgroup>
             <col width="20">
@@ -102,7 +99,6 @@
             <td>{{status[carAppoint.status]}}</td>
             <td>
                 <button class="layui-btn layui-btn-xs" ng-click="editCarAppoint();getCarAppointById(carAppoint.id);toggle()"><i class="layui-icon">&#xe642;</i>查看详情</button>
-                <!--<button class="layui-btn layui-btn-danger layui-btn-xs" ng-click="delCarConfirm(carAppoint.id)"><i class="layui-icon">&#xe640;</i>删除</button>-->
             </td>
         </tr>
         </tbody>
@@ -122,7 +118,7 @@
                         <label class="layui-form-label">车辆名称:</label>
                         <div class="layui-input-block" style="padding: 5px">
                             <input type="text"  id="carName" autocomplete="off" class="layui-input"
-                                   lay-verify="required" ng-model="carAppoint.carInfo.carName" style="height: 30px;border-radius: 10px">
+                                   lay-verify="required" ng-model="carAppoint.carInfo.carName" style="height: 30px;border-radius: 10px" disabled="disabled">
                         </div>
                     </div>
                     <div class="layui-form-item magt3">
@@ -130,7 +126,7 @@
                         <div class="layui-input-block" style="padding: 5px">
                             <input type="text" id="carnumber" autocomplete="off" class="layui-input"
                                    lay-verify="required" ng-model="carAppoint.carInfo.licensePlateNum"
-                                    style="height: 30px;border-radius: 10px">
+                                    style="height: 30px;border-radius: 10px" disabled="disabled">
                         </div>
                     </div>
                     <div class="layui-form-item magt3">
@@ -138,21 +134,21 @@
                         <div class="layui-input-block" style="padding: 5px">
                             <input type="text" id="carXh" autocomplete="off" class="layui-input"
                                    lay-verify="required" ng-model="carAppoint.carInfo.carXh"
-                                   style="height: 30px;border-radius: 10px">
+                                   style="height: 30px;border-radius: 10px" disabled="disabled">
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label">开始时间:</label>
                         <div class="layui-input-block" style="padding: 5px">
                             <input type="text" ng-model="carAppoint.startTime" autocomplete="off" class="layui-input"
-                                   style="height: 30px;border-radius: 10px">
+                                   style="height: 30px;border-radius: 10px" disabled="disabled">
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label">结束时间:</label>
                         <div class="layui-input-block" style="padding: 5px">
                             <input type="text" ng-model="carAppoint.endTime" autocomplete="off" class="layui-input"
-                                    style="height: 30px;border-radius: 10px">
+                                    style="height: 30px;border-radius: 10px" disabled="disabled">
                         </div>
                     </div>
                 </div>
@@ -170,14 +166,14 @@
                     <label class="layui-form-label">预约用户:</label>
                     <div class="layui-input-block" style="padding: 5px">
                         <input type="text" ng-model="carAppoint.user.name" autocomplete="off" class="layui-input"
-                               style="height: 30px;border-radius: 10px">
+                               style="height: 30px;border-radius: 10px" disabled="disabled">
                     </div>
                 </div>
                 <div class="layui-inline">
                     <label class="layui-form-label">预约状态:</label>
                     <div class="layui-input-block" style="padding: 5px">
                         <input type="text" ng-model="status[carAppoint.status]" class="layui-input" lay-verify="required|number"
-                               style="height: 30px;border-radius: 10px">
+                               style="height: 30px;border-radius: 10px" disabled="disabled">
                     </div>
                 </div>
             </div>

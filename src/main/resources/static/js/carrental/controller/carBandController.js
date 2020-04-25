@@ -18,7 +18,7 @@ app.controller('carBandController', function ($scope, $controller, carBandServic
         carBandService.getCarBandById(id).success(
             function (response) {
                 if(response != null){
-                    $scope.carBand=response;
+                    $scope.carBand=response.data;
                 }else{
                     layer.alert("汽车品牌不存在！", {icon: 2});
                 }

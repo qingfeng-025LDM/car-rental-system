@@ -9,4 +9,6 @@ public interface UserService extends IService<User> {
     User getUserInfoById(String id);
 
     Pages getUserInfoPage(User user, int curPage, int size);
+
+    User findUserAndRoleByUserId(String username);
 }

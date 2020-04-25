@@ -3,12 +3,12 @@ app.service('carOrderService', function ($http) {
         return $http.post('/order/getOrderPage?curPage='+curPage+'&size='+size, searchOrder);
     }
 
-    this.searchPurchaseOrder=function (currentPage, rows, searchPurOrder) {
-        return $http.post('/order/searchPurOrder?currentPage='+currentPage+'&rows='+rows, searchPurOrder);
+    this.getOrderById=function (id) {
+        return $http.get('/order/getOrderById?id='+id);
     }
 
-    //生成采购订单
-    this.addPurchaseOrder=function (repSheetId) {
-        return $http.get('/purchase/addPurOrder?repSheetId='+repSheetId);
+    //根据订单id获取订单详情
+    this.getOrderDetailByOrderId=function (orderId) {
+        return $http.get('/order/getOrderDetailByOrderId?orderId='+orderId);
     }
 })

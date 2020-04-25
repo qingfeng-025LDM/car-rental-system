@@ -141,6 +141,8 @@ app.controller('carInfoController', function ($scope, $controller, carInfoServic
     //是否租用
     $scope.isrent=['否', '是'];
 
+    $scope.hasDriver=['否', '是'];
+
     //车辆状态
     $scope.status=['禁止出租', '正常', '正在维修', '已删除'];
     

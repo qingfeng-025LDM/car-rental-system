@@ -1,7 +1,6 @@
 package com.cfblj.carrental.model;
 
 /**
- * @author Wuhz
  * @date 2020-4-25 15:05
  */
 public class Result {

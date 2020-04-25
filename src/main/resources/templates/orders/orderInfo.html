@@ -95,7 +95,8 @@
             <td>{{order.totalPrice}}</td>
             <td>{{status[order.status]}}</td>
             <td>
-                <button class="layui-btn layui-btn-xs" ng-click="editCarInfo();getCarInfoById(order.id);toggle()"><i class="layui-icon">&#xe642;</i>查看详情</button>
+                <button class="layui-btn layui-btn-xs" ng-click="editOrder();getCarInfoById(order.id);toggle()"><i class="layui-icon">&#xe642;</i>查看</button>
+                <button class="layui-btn layui-btn-xs" ng-click="checkCarOrderDetail();getOrderDetailByOrderId(order.id);toggle()"><i class="layui-icon">&#xe642;</i>查看订单项</button>
             </td>
         </tr>
         </tbody>
@@ -106,7 +107,7 @@
 <tm-pagination conf="paginationConf"></tm-pagination>
 
 <!-- 添加和修改的弹出层-->
-<div style="display: none;padding: 20px" id="editOrAddPop">
+<div style="display: none;padding: 20px" id="checkOrder">
     <form class="layui-form layui-row layui-col-space10" lay-filter="dataFrm" id="dataFrm">
         <div class="layui-col-md12 layui-col-xs12">
             <div class="layui-row layui-col-space10">
@@ -155,50 +156,32 @@
 </div>
 
 <!--采购订单项弹窗-->
-<div id="checkPurOrderItem" ng-hide="purOrderItemHide">
+<div id="checkCarOrderDetail" ng-hide="purOrderItemHide">
     <table class="layui-table">
         <colgroup>
-            <!--<col width="20">-->
-            <col width="200">
             <col width="200">
             <col width="100">
-            <!--<col width="150">-->
-            <!--<col width="100">-->
-            <!--<col width="100">-->
-            <!--<col width="250">-->
+            <col width="100">
+            <col width="200">
+            <col width="200">
             <col>
         </colgroup>
         <thead>
         <tr>
-            <!--<th><input type="checkbox" lay-skin="primary"></th>-->
-            <th>订单项编号</th>
-            <th>商品名称</th>
-            <th>采购价格</th>
-            <!--<th>商品图片</th>-->
-            <th>数量</th>
-            <!--<th>单位</th>-->
-            <!--<th>生产日期</th>-->
-            <!--<th>保质期</th>-->
+            <th>车辆名称</th>
+            <th>租金</th>
+            <th>人数</th>
+            <th>开始时间</th>
+            <th>结束时间</th>
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="purOrderItem in purOrderItemList">
-            <!--<td><input type="checkbox" lay-skin="primary"></td>-->
-            <td>{{purOrderItem.purOrderItemId}}</td>
-            <td>{{purOrderItem.product.prodName}}</td>
-            <td>{{purOrderItem.prodPrice}}</td>
-            <!--<td>{{purOrderItem.product.prodImg}}</td>-->
-            <td>{{purOrderItem.prodNum}}</td>
-            <!--<td>{{purOrderItem.product.prodUnit}}</td>-->
-            <!--<td>{{purOrderItem.product.productionDate | date:'yyyy-MM-dd'}}</td>-->
-            <!--<td>-->
-            <!--<span ng-if="purOrderItem.product.storageTime != null">-->
-            <!--{{purOrderItem.product.storageTime}}个月-->
-            <!--</span>-->
-            <!--<span ng-if="purOrderItem.product.storageTime == null">-->
-            <!--无-->
-            <!--</span>-->
-            <!--</td>-->
+        <tr ng-repeat="orderDetails in orderDetailList">
+            <td>{{orderDetails.carInfo.carName}}</td>
+            <td>{{orderDetails.rentPrice}}</td>
+            <td>{{orderDetails.personNum}}</td>
+            <td>{{orderDetails.startTime}}</td>
+            <td>{{orderDetails.endTime}}</td>
         </tr>
         </tbody>
     </table>

@@ -12,19 +12,19 @@ app.controller('carOrderController', function ($scope, $controller, carOrderServ
         );
     }
 
-    //采购订单项弹窗
+    //订单详情弹窗
     $scope.checkCarOrderDetail=function () {
         layui.use('layer', function () {
             var layer = layui.layer;
 
             layer.open({
-                title: ['采购订单项信息', 'font-size:40px'],
+                title: ['订单详细信息', 'font-size:40px'],
                 type: 1,
                 maxmin: true,
                 skin: 'layui-layer-rim', //加上边框
-                area: ['1290px', '754px'],
+                area: ['800px', '554px'],
                 shadeClose: false, //关闭遮罩关闭
-                content: $('#checkPurOrderItem'), //弹窗的内容
+                content: $('#checkCarOrderDetail'), //弹窗的内容
                 cancel: function () {
                     $scope.hideAndShow();
                 }
@@ -33,33 +33,52 @@ app.controller('carOrderController', function ($scope, $controller, carOrderServ
         });
     }
 
+    $scope.editOrder=function () {       //车辆信息弹窗
+        layui.use('layer', function () {
+            var layer = layui.layer;
+
+            layer.open({
+                title: ['订单信息', 'font-size:20px'],
+                type: 1,
+                maxmin: true,
+                skin: 'layui-layer-rim', //加上边框
+                area: ['600px', '450px'],
+                shadeClose: false, //关闭遮罩关闭
+                content: $('#checkOrder'),
+                cancel: function () {
+                    $scope.toggle();
+                }
+            });
+        });
+    }
+
     //根据销售订单id查询订单选项
-    $scope.findItemByPurOrderId=function (purOrderId) {
-        carOrderService.findItemByPurOrderId(purOrderId).success(
+    $scope.getOrderDetailByOrderId=function (orderId) {
+        carOrderService.getOrderDetailByOrderId(orderId).success(
             function (response) {
-                $scope.purOrderItemList=response;
+                if(response != null){
+                    $scope.orderDetailList=response.data;
+                }else{
+                    layui.msg("订单项信息不存在！", {icon: 2});
+                }
+
             }
         );
     }
 
-    $scope.searchPurOrder={};
-    $scope.search=function(currentPage, rows){
-        carOrderService.searchPurchaseOrder(currentPage, rows, $scope.searchPurOrder).success(
+    //根据销售订单id查询订单选项
+    $scope.getOrderById=function (id) {
+        carOrderService.getOrderById(id).success(
             function (response) {
-                $scope.list = response.rows;	//显示当前页数据
-                $scope.paginationConf.totalItems = response.sum;	//更新总记录数
+                if(response != null){
+                    $scope.order=response.data;
+                }else{
+                    layui.msg("订单信息不存在！", {icon: 2});
+                }
             }
         );
     }
 
-    //查询所有员工信息
-    $scope.findByDeptId=function(deptId){
-        employeeService.findByDeptId(deptId).success(
-            function (response) {
-                $scope.employeeList=response;
-            }
-        );
-    }
 
     //查询采购订单项弹窗的隐藏属性
     $scope.purOrderItemHide=true;

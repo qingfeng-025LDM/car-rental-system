@@ -98,5 +98,5 @@ app.controller('userInfoController', function ($scope, $controller, userInfoServ
     $scope.status=['正常', '禁用', '异常']
     $scope.sex=['女', '男']
     $scope.isMember=['否', '是']
-
+    // $scope.userMember = [{key:"0", value:"否"},{key:"1", value:"是"}]
 });

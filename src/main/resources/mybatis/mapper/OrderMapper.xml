@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cfblj.carrental.mapper.OrderMapper">
     <select id="selectOrderList" resultType="com.cfblj.carrental.model.Order" parameterType="com.cfblj.carrental.model.Order">
-        select a.* from car_order a
+        select a.*, b.name as 'user.name' from car_order a
         left join user_info b on b.id = a.user_id
         <where>
             <if test="orderNum != null and orderNum != ''">

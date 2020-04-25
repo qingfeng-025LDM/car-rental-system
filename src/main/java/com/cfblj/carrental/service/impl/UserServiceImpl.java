@@ -40,4 +40,16 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         Page<User> page = (Page<User>)userMapper.selectUserInfo(user);
         return new Pages(page.getTotal(), page.getResult());
     }
+
+
+    /**
+     * 根据用户ID查询用户和权限信息
+     * @param username
+     * @return
+     */
+    @Override
+    public User findUserAndRoleByUserId(String username) {
+       User user = userMapper.selectUserAndRoleByUserId(username);
+        return user;
+    }
 }

@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.io.Serializable;
+import java.util.List;
 
 @TableName("user_info")
 public class User implements Serializable {
@@ -27,6 +28,9 @@ public class User implements Serializable {
     private String carNum;
     @TableField("driving_license_image")
     private String drivingLicenseImage;
+
+    @TableField(exist = false)
+    private List<Role> roleList;
 
     public String getId() {
         return id;
@@ -146,5 +150,13 @@ public class User implements Serializable {
 
     public void setDrivingLicenseImage(String drivingLicenseImage) {
         this.drivingLicenseImage = drivingLicenseImage;
+    }
+
+    public List<Role> getRoleList() {
+        return roleList;
+    }
+
+    public void setRoleList(List<Role> roleList) {
+        this.roleList = roleList;
     }
 }

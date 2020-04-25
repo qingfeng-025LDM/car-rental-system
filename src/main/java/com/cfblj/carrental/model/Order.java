@@ -23,7 +23,6 @@ public class Order {
     private String userId;
 
     @TableField("create_time")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private String createTime;
 
     @TableField(exist = false)

@@ -9,7 +9,7 @@
                 and name like '%${name}%'
             </if>
             <if test="sex != null and sex != ''">
-                and name = #{sex}
+                and sex = #{sex}
             </if>
             <if test="address != null and address != ''">
                 and address like '%${address}%'
@@ -17,7 +17,14 @@
             <if test="phone != null and phone != ''">
                 and phone like '%${phone}%'
             </if>
+            <if test="isMember != null and isMember != ''">
+                and is_member = #{isMember}
+            </if>
         </where>
+    </select>
+
+    <select id="selectUserAndRoleByUserId" resultType="com.cfblj.carrental.model.User">
+
     </select>
 
 </mapper>

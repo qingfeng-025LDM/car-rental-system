@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>超市后台管理系统——后台登录</title>
+    <link rel="stylesheet" th:href="@{/webjars/layui/2.4.5/css/layui.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/login.css}" type="text/css">
+
+    <style type="text/css">
+        body{
+            background: url("static/images/computer.jpg") no-repeat;
+        }
+    </style>
+</head>
+<body>
+<div class="main layui-layout" id="larry_login">
+    <div class="title">后台管理系统</div>
+    <p class="info">登录中心</p>
+    <div class="user-info">
+        <form class="layui-form" th:action="@{/login}" method="post">
+            <div class="layui-form-item">
+                <label class="layui-form-label">用户名:</label>
+                <input type="text" required lay-verify="required" name="username"
+                       class="layui-input larry-input" placeholder="请输入账号" autocomplete="off">
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">密码:</label>
+                <input type="password" required lay-verify="required|password" name="password"
+                       class="layui-input larry-input" placeholder="请输入密码" autocomplete="off">
+            </div>
+            <div class="layui-form-item">
+                <input type="submit" class="layui-btn larry-btn" value="立即登录">
+            </div>
+        </form>
+    </div>
+    <div class="copy-right"><span style="color:white">Background Management System Design by yongfeng.L</span></div>
+</div>
+
+<script type="text/javascript" th:src="@{/webjars/layui/2.4.5/layui.js}"></script>
+<script type="text/javascript">
+    layui.use('form', function(){
+        var form = layui.form; //只有执行了这一步，部分表单元素才会自动修饰成功
+        //但是，如果你的HTML是动态生成的，自动渲染就会失效
+        //因此你需要在相应的地方，执行下述方法来手动渲染，跟这类似的还有 element.init();
+        form.render();
+    });
+</script>
+</body>
+</html>
