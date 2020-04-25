@@ -48,7 +48,7 @@ public class OrderController {
 
     /**
      * 分页查询
-     * @param order
+     * @param order：搜索对象
      * @param curPage
      * @param size
      * @return

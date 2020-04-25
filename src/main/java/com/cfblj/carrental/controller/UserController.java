@@ -59,7 +59,7 @@ public class UserController {
     }
 
     /**
-     * 根据id查询
+     * 根据id查询用户
      * @param id
      * @return
      */
@@ -73,6 +73,13 @@ public class UserController {
         }
     }
 
+    /**
+     * 分页查询
+     * @param user
+     * @param curPage
+     * @param size
+     * @return
+     */
     @RequestMapping("/getUserInfoPage")
     public Pages getUserInfoPage(@RequestBody User user, int curPage, int size){
         return userService.getUserInfoPage(user, curPage, size);
