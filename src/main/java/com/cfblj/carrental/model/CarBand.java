@@ -13,10 +13,10 @@ public class CarBand implements Serializable {
     @TableId(type = IdType.UUID)
     private String id;
 
-    @TableField("car_id")
+    @TableField("band_name")
     private String bandName;
 
-    @TableField("car_id")
+    @TableField("status")
     private String status;
 
     public String getId() {

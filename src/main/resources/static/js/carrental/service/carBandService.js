@@ -1,10 +1,7 @@
 app.service('carBandService', function ($http) {
-    this.getCarBandList=function () {
-        return $http.get('/carBand/getCarBandList');
-    }
 
-    this.searchProduct=function (curPage, size, searchProduct) {
-        return $http.post('/carBand/searchCarBand?curPage='+curPage+'&size='+size, searchProduct);
+    this.getCarBandPage=function (curPage, size, searchCarBand) {
+        return $http.post('/carBand/getCarBandPage?curPage='+curPage+'&size='+size, searchCarBand);
     }
 
     this.getCarBandById=function (id) {

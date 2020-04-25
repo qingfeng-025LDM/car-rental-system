@@ -2,6 +2,7 @@ package com.cfblj.carrental.controller;
 
 import com.cfblj.carrental.model.CarBand;
 import com.cfblj.carrental.service.CarBandService;
+import com.cfblj.carrental.utils.Pages;
 import com.cfblj.carrental.utils.ReturnObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,14 +22,9 @@ public class CarBandController {
      * 查询汽车品牌列表
      * @return
      */
-    @RequestMapping("/getCarBandList")
-    public ReturnObject getCarBandList(){
-        try {
-            List<CarBand> carBandList = carBandService.getCarBandList();
-            return new ReturnObject(carBandList);
-        }catch (Exception e){
-            return new ReturnObject(false, "数据异常");
-        }
+    @RequestMapping("/getCarBandPage")
+    public Pages getCarBandPage(@RequestBody CarBand carBand, int curPage, int size){
+        return carBandService.getCarBandPage(carBand, curPage, size);
     }
 
     /**

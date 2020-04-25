@@ -1,10 +1,14 @@
 package com.cfblj.carrental.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.cfblj.carrental.exception.CustomException;
 import com.cfblj.carrental.mapper.CarBandMapper;
 import com.cfblj.carrental.model.CarBand;
 import com.cfblj.carrental.service.CarBandService;
+import com.cfblj.carrental.utils.Pages;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,22 +21,12 @@ public class CarBandServiceImpl extends ServiceImpl<CarBandMapper, CarBand> impl
     @Autowired
     private CarBandMapper carBandMapper;
 
-    /**
-     * 查询列表
-     * @return
-     */
-    @Override
-    public List<CarBand> getCarBandList() {
-        List<CarBand> carBandList = carBandMapper.selectList(null);
-
-        return carBandList;
-    }
 
     /**
      * 添加
      * @param carBand
      */
-    @Transactional
+//    @Transactional
     @Override
     public void addCarBand(CarBand carBand) {
         if (carBand == null){
@@ -97,5 +91,19 @@ public class CarBandServiceImpl extends ServiceImpl<CarBandMapper, CarBand> impl
         for (String id : idArr) {
             this.delCarBandById(id);
         }
+    }
+
+    @Override
+    public Pages getCarBandPage(CarBand carBand, int curPage, int size) {
+        PageHelper.startPage(curPage, size);
+        QueryWrapper<CarBand> wrapper = new QueryWrapper<CarBand>();
+        if (StringUtils.isNotBlank(carBand.getBandName())){
+            wrapper.like("band_name", carBand.getBandName());
+        }
+        if (StringUtils.isNotBlank(carBand.getStatus())){
+            wrapper.like("status", carBand.getStatus());
+        }
+        Page<CarBand> page = (Page<CarBand>)carBandMapper.selectList(wrapper);
+        return new Pages(page.getTotal(), page.getResult());
     }
 }

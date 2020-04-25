@@ -13,21 +13,22 @@ public class OrderDetail {
     @TableId(type = IdType.UUID)
     private String id;
 
-    @TableField("orderId")
-    private String order_id;
+    @TableField("order_id")
+    private String orderId;
 
-    @TableField("rentPrice")
-    private Double rent_price;
+    @TableField("rent_price")
+    private Double rentPrice;
 
-    @TableField("personNum")
-    private int person_num;
+    @TableField("person_num")
+    private int personNum;
 
     private Double duration;
-    @TableField("startTime")
-    private Date start_time;
 
-    @TableField("endTime")
-    private Date end_time;
+    @TableField("start_time")
+    private Date startTime;
+
+    @TableField("end_time")
+    private Date endTime;
 
     public String getId() {
         return id;
@@ -37,28 +38,44 @@ public class OrderDetail {
         this.id = id;
     }
 
-    public String getOrder_id() {
-        return order_id;
+    public String getOrderId() {
+        return orderId;
     }
 
-    public void setOrder_id(String order_id) {
-        this.order_id = order_id;
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
     }
 
-    public Double getRent_price() {
-        return rent_price;
+    public Double getRentPrice() {
+        return rentPrice;
     }
 
-    public void setRent_price(Double rent_price) {
-        this.rent_price = rent_price;
+    public void setRentPrice(Double rentPrice) {
+        this.rentPrice = rentPrice;
     }
 
-    public int getPerson_num() {
-        return person_num;
+    public int getPersonNum() {
+        return personNum;
     }
 
-    public void setPerson_num(int person_num) {
-        this.person_num = person_num;
+    public void setPersonNum(int personNum) {
+        this.personNum = personNum;
+    }
+
+    public Date getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
+    }
+
+    public Date getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
     }
 
     public Double getDuration() {
@@ -69,19 +86,5 @@ public class OrderDetail {
         this.duration = duration;
     }
 
-    public Date getStart_time() {
-        return start_time;
-    }
 
-    public void setStart_time(Date start_time) {
-        this.start_time = start_time;
-    }
-
-    public Date getEnd_time() {
-        return end_time;
-    }
-
-    public void setEnd_time(Date end_time) {
-        this.end_time = end_time;
-    }
 }

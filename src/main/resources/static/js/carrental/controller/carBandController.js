@@ -1,12 +1,14 @@
 app.controller('carBandController', function ($scope, $controller, carBandService) {
 
-    $controller('baseController', {$scope:$scope});
+    $controller('baseSearchController', {$scope:$scope});
 
-    //查询所有品牌信息
-    $scope.getCarBandList=function () {
-        carInfoService.getCarBandList().success(
+    //品牌搜索
+    $scope.searchCarBand={};    //定义品牌搜索对象
+    $scope.findPage=function (currentPage, rows) {
+        carBandService.getCarBandPage(currentPage, rows, $scope.searchCarBand).success(
             function (response) {
-                $scope.carBandList = response;
+                $scope.carBandList = response.rows;	//显示当前页数据
+                $scope.paginationConf.totalItems = response.sum;	//更新总记录数
             }
         );
     }
@@ -33,12 +35,12 @@ app.controller('carBandController', function ($scope, $controller, carBandServic
                 type: 1,
                 maxmin: true,
                 skin: 'layui-layer-rim', //加上边框
-                area: ['400px', '200px'],
+                area: ['500px', '300px'],
                 shadeClose: false, //关闭遮罩关闭
-                content: $('#edit'), //弹窗的内容
+                content: $('#editOrAddPop'), //弹窗的内容
                 btn: ['保存','取消'],
                 btn1: function(index, layreo){
-                    $scope.saveProduct();
+                    $scope.saveCarBand();
                     $scope.toggle();    //修改ng-hide的值
                     layer.close(index);
                 },
@@ -63,8 +65,7 @@ app.controller('carBandController', function ($scope, $controller, carBandServic
         cardBandRes.success(
             function (response) {
                 if(response.success){
-                    // $scope.reloadList();
-                    $scope.getCarBandList();
+                    $scope.reloadList();
                     layer.msg(response.msg, {icon: 1});
                 }else{
                     layer.msg(response.msg, {icon: 2});
@@ -73,12 +74,12 @@ app.controller('carBandController', function ($scope, $controller, carBandServic
         );
     }
 
-    //删除员工
+    //删除汽车品牌
     $scope.delCarBandById=function (id) {
         carBandService.delCarBandById(id).success(
             function (response) {
                 if(response.success){
-                    $scope.getCarBandList();
+                    $scope.reloadList();
                     layer.msg(response.msg, {icon: 1});
                 }else{
                     layer.msg(response.msg, {icon: 2});
@@ -100,7 +101,7 @@ app.controller('carBandController', function ($scope, $controller, carBandServic
         carBandService.delCarBandByIds($scope.selectIds).success(
             function (response) {
                 if(response.success){
-                    $scope.getCarBandList();
+                    $scope.reloadList();
                     layer.msg(response.msg, {icon: 1});
                 }else{
                     layer.msg(response.msg, {icon: 2});
@@ -109,7 +110,7 @@ app.controller('carBandController', function ($scope, $controller, carBandServic
         );
     }
     //批量删除询问
-    $scope.delProductsConfirm=function(){
+    $scope.delCarBandsConfirm=function(){
         if ($scope.selectIds.length == 0){
             layer.alert("请选择要删除的商品", {icon:0})
         }else {
@@ -121,17 +122,7 @@ app.controller('carBandController', function ($scope, $controller, carBandServic
         }
     }
 
-    //商品搜索
-    $scope.searchCarBand={};    //定义商品搜索对象
-    $scope.search=function (currentPage, rows) {
-        carBandService.searchProduct(currentPage, rows, $scope.searchProduct).success(
-            function (response) {
-                $scope.list = response.rows;	//显示当前页数据
-                $scope.paginationConf.totalItems = response.sum;	//更新总记录数
-            }
-        );
-    }
-
+    $scope.status=['禁用', '启用']
 
     //修改和添加弹窗 隐藏的属性
     $scope.addNumHide=true;
