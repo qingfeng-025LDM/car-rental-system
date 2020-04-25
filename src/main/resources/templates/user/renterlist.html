@@ -97,7 +97,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="user in userList" ng-click="updateSelectIds($event, emp.empId)">
+        <tr ng-repeat="user in userList" ng-click="updateSelectIds($event, user.id)">
             <td><input type="checkbox" name="" lay-skin="primary"></td>
             <td>{{user.name}}</td>
             <td>{{sex[user.sex]}}</td>
@@ -107,7 +107,7 @@
             <td>{{status[user.status]}}</td>
             <td>
                 <button class="layui-btn layui-btn-xs" ng-click="editUser();getUserInfoById(user.id);toggle()"><i class="layui-icon">&#xe642;</i>查看详情</button>
-                <button class="layui-btn layui-btn-danger layui-btn-xs" ng-click="delCarConfirm(carInfo.id)"><i class="layui-icon">&#xe640;</i>禁用</button>
+                <button class="layui-btn layui-btn-danger layui-btn-xs" ng-click="delCarConfirm(user.id)"><i class="layui-icon">&#xe640;</i>禁用</button>
             </td>
         </tr>
         </tbody>

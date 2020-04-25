@@ -30,6 +30,9 @@ public class OrderDetail {
     @TableField("end_time")
     private Date endTime;
 
+    @TableField("car_id")
+    private String carId;
+
     public String getId() {
         return id;
     }
@@ -86,5 +89,11 @@ public class OrderDetail {
         this.duration = duration;
     }
 
+    public String getCarId() {
+        return carId;
+    }
 
+    public void setCarId(String carId) {
+        this.carId = carId;
+    }
 }
