@@ -32,7 +32,7 @@ public class UserController {
 
     @RequestMapping("/regist")
     public Result regist(User user){
-        user.setId(UUID.randomUUID().toString());
+//        user.setId(UUID.randomUUID().toString());
         List<User> list = userService.list();
         for (User u : list) {
             if(u.getLoginName().equals(user.getLoginName())){

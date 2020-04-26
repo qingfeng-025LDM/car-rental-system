@@ -1,6 +1,8 @@
 package com.cfblj.carrental.model;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.io.Serializable;
@@ -8,6 +10,7 @@ import java.util.List;
 
 @TableName("user_info")
 public class User implements Serializable {
+    @TableId(type = IdType.UUID)
     private String id;
     private String name;
     private String sex;
