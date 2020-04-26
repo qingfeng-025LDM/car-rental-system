@@ -1,11 +1,8 @@
 app.service('loginService', function ($http) {
 
-    this.showLoginUser=function () {
-        return $http.get('/login/loginUser');
+    this.getLoginUser=function () {
+        return $http.get('/login/getLoginUser');
     }
 
-    this.updatePassword=function (password) {
-        return $http.get('/login/updatePassword?password='+password);
-    }
 
 });

@@ -60,7 +60,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             throw new CustomException("用户名不存在");
         }
         User user = userMapper.selectOne(new QueryWrapper<User>().eq("login_name", username));
-        if (user != null || StringUtils.isNotBlank(user.getId())){
+        if (user != null && StringUtils.isNotBlank(user.getId())){
             List<Role> roleList = roleMapper.selectRolesByUserId(user.getId());
             user.setRoleList(roleList);
         }

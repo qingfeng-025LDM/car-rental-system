@@ -1,6 +1,6 @@
-app.controller('loginController', function ($scope, loginService, departmentService) {
-   $scope.showLoginUser=function () {
-       loginService.showLoginUser().success(
+app.controller('loginController', function ($scope, loginService) {
+   $scope.getLoginUser=function () {
+       loginService.getLoginUser().success(
            function(response){
                $scope.loginUser=response.user;
            }
@@ -20,15 +20,5 @@ app.controller('loginController', function ($scope, loginService, departmentServ
        );
    }
 
-   $scope.deptNameList=[];
-   $scope.findDeptByEmpDeptId=function () {
-       departmentService.getAllDepartment().success(
-           function (response) {
-               for (var i = 0; i < response.length; i++){
-                   $scope.deptNameList[response[i].deptId]=response[i].deptName;
-               }
-           }
-       );
-   }
 
 });

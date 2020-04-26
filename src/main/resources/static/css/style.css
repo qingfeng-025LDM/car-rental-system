@@ -23,15 +23,15 @@
 	margin-top: 20px;
 }
 
-.userAndDept{
+.userStyle{
 	float: right;
 }
 
-.userAndDept > div{
-	margin-top: 20px;
+.userStyle > div{
+	margin-top: 27px;
 }
 
-.userAndDept > div > span{
+.userStyle > div > span{
 	color: #28807b;
 	font-size: 15px;
 }
