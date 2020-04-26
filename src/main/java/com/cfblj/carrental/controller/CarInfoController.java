@@ -1,6 +1,7 @@
 package com.cfblj.carrental.controller;
 
 import com.cfblj.carrental.model.CarInfo;
+import com.cfblj.carrental.model.Result;
 import com.cfblj.carrental.service.CarInfoService;
 import com.cfblj.carrental.utils.Pages;
 import com.cfblj.carrental.utils.ReturnObject;
@@ -28,11 +29,11 @@ public class CarInfoController {
      */
 
     @RequestMapping("/getCarDetail")
-    public CarInfo getCarDetail(String id) {
+    public Result getCarDetail(String id) {
         List<CarInfo> carInfoList = carInfoService.list();
         for (CarInfo carInfo : carInfoList) {
             if (carInfo.getId().equals(id)) {
-                return carInfo;
+                return new Result(carInfo);
             }
         }
         return null;
@@ -44,9 +45,9 @@ public class CarInfoController {
      * @return
      */
     @RequestMapping("/getCarList")
-    public List<CarInfo> getCarList() {
+    public Result getCarList() {
         List<CarInfo> carInfoList = carInfoService.list();
-        return carInfoList;
+        return new Result("",true,carInfoList);
     }
 
 

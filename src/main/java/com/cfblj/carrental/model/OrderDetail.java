@@ -16,8 +16,8 @@ public class OrderDetail {
     @TableField("order_id")
     private String orderId;
 
-    @TableField("rent_price")
-    private Double rentPrice;
+    @TableField("total_price")
+    private Double totalPrice;
 
     @TableField("person_num")
     private int personNum;
@@ -52,12 +52,12 @@ public class OrderDetail {
         this.orderId = orderId;
     }
 
-    public Double getRentPrice() {
-        return rentPrice;
+    public Double getTotalPrice() {
+        return totalPrice;
     }
 
-    public void setRentPrice(Double rentPrice) {
-        this.rentPrice = rentPrice;
+    public void setTotalPrice(Double totalPrice) {
+        this.totalPrice = totalPrice;
     }
 
     public int getPersonNum() {

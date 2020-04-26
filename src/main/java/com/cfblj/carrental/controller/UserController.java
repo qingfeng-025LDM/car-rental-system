@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.UUID;
+
 @CrossOrigin
 @RestController
 @RequestMapping("/user")
@@ -30,6 +32,7 @@ public class UserController {
 
     @RequestMapping("/regist")
     public Result regist(User user){
+        user.setId(UUID.randomUUID().toString());
         List<User> list = userService.list();
         for (User u : list) {
             if(u.getLoginName().equals(user.getLoginName())){

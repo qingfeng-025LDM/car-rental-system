@@ -3,56 +3,168 @@
 <head>
   <meta charset="UTF-8">
   <!-- import CSS -->
+  <link rel="stylesheet" href="./css/index.css">
   <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
 </head>
 <body>
   <div id="app">
 	<div style="width: 900px;margin: 0 auto;margin-top: 20px;box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)">
 		<div>
+			<div style="text-align: right;padding-right: 20px;"><a style="text-decoration:none;" href="index.html">返回</a></div>
 			<div style="display: inline-block;width: 492px;border: 1px solid #d7dae2;">
-				<div style="padding-left: 20px;">雪佛兰新科鲁兹/三厢/1.5自动</div>
-				<el-image style="width: 492px; height: 271px" src="img/848_c.jpg" fit="contain"></el-image>
+				<div style="padding-left: 20px;">{{peizhi.carName}}</div>
+				<el-image style="width: 492px; height: 271px" :src="peizhi.image" fit="contain"></el-image>
 			</div>
 			<div style="display: inline-block;width: 400px;height: 271px;">
-				<el-row style="padding: 30px;" class="jbxx" >
+				<!-- <el-row style="padding: 30px;" class="jbxx" >
 				  <el-col style="border-bottom: 1px solid #d7dae2;" :span="24"><span>基本信息</el-col>
-				  <el-col :span="24"><span>品   牌：</span> 雪佛兰</el-col>
+				  <el-col :span="24"><span>品   牌：</span> {{peizhi.carName}}</el-col>
 				  <el-col :span="24"><span>车   系：</span> 科鲁兹</el-col>
 				  <el-col :span="24"><span>年 代 款：</span> 2017</el-col>
 				  <el-col :span="24"><span>配 置 款：</span> 先锋天窗版</el-col>
+				  <el-col :span="24"><el-button size="mini" type="success" @click="dingdan" >订单确定</el-button></el-col>
+				</el-row> -->
+				<el-row class="pzxx" >
+				  <el-col style="border-bottom: 1px solid #d7dae2;" :span="24"><span>配置信息</el-col>
+				  <el-col :span="12"><span>车 牌 号：</span> {{peizhi.licensePlateNum}}</el-col>
+				  <el-col :span="12"><span>型   号：</span> {{peizhi.carXh}}</el-col>
+				  <el-col :span="12"><span>是否租用：</span> {{peizhi.isRented=='1'? '是': peizhi.isRented=='0'?'否':''}}</el-col>
+				  <el-col :span="12"><span>汽车品牌：</span> {{peizhi.carBandId}}</el-col>
+				  <el-col :span="12"><span>出租价格：</span> {{peizhi.rentPrice}}</el-col>
+				  <el-col :span="12"><span>座 位 数：</span> {{peizhi.seatNum}}</el-col>
+				  <el-col :span="12"><span>用   途：</span> {{peizhi.purpose}}</el-col>
+				  <el-col :span="12"><span>发布时间：</span> {{peizhi.releaseTime}}</el-col>
+				  <el-col :span="12"><span>汽车状态：</span> {{peizhi.carStatus=='1'? '正常': peizhi.carStatus=='0'? '禁止出租':peizhi.carStatus=='2'? '正在维修':peizhi.carStatus=='3'? '已删除':peizhi.carStatus=='4'? '已出租':''}}</el-col>
+				  <el-col :span="12"><span>有无代驾：</span> {{peizhi.hasDriver=='1'? '有': peizhi.isRented=='0'?'无':''}}</el-col>
+				  <el-col :span="12"><span>所属城市：</span> {{peizhi.city}}</el-col>
+				   <el-col :span="24"><el-button size="mini" type="success" @click="dingdan" >订单确定</el-button></el-col>
 				</el-row>
 			</div>
 		</div>
 		<div style="padding: 20px;">
-			<el-row class="pzxx" >
+			<!-- <el-row class="pzxx" >
 			  <el-col style="border-bottom: 1px solid #d7dae2;" :span="24"><span>配置信息</el-col>
-			  <el-col :span="12"><span>座 位 数：</span> 5</el-col>
-			  <el-col :span="12"><span>车 门 数：</span> 4</el-col>
-			  <el-col :span="12"><span>燃料类型：</span> 汽油</el-col>
-			  <el-col :span="12"><span>变速箱类型：</span> AT</el-col>
-			  <el-col :span="12"><span>排　　量：</span> 1490</el-col>
-			  <el-col :span="12"><span>燃油标号：</span> 92-93汽油</el-col>
-			  <el-col :span="12"><span>驱动方式：</span> 前驱</el-col>
-			  <el-col :span="12"><span>发动机进气形式：</span> 自然吸气</el-col>
-			  <el-col :span="12"><span>天　　窗：</span> 单天窗</el-col>
-			  <el-col :span="12"><span>油箱容量：</span> 52</el-col>
-			</el-row>
+			  <el-col :span="12"><span>车 牌 号：</span> {{peizhi.licensePlateNum}}</el-col>
+			  <el-col :span="12"><span>型   号：</span> {{peizhi.carXh}}</el-col>
+			  <el-col :span="12"><span>是否租用：</span> {{peizhi.isRented=='1'? '是': peizhi.isRented=='0'?'否':''}}</el-col>
+			  <el-col :span="12"><span>汽车品牌：</span> {{peizhi.carBandId}}</el-col>
+			  <el-col :span="12"><span>出租价格：</span> {{peizhi.rentPrice}}</el-col>
+			  <el-col :span="12"><span>座 位 数：</span> {{peizhi.seatNum}}</el-col>
+			  <el-col :span="12"><span>用   途：</span> {{peizhi.purpose}}</el-col>
+			  <el-col :span="12"><span>发布时间：</span> {{peizhi.releaseTime}}</el-col>
+			  <el-col :span="12"><span>汽车状态：</span> {{peizhi.carStatus=='1'? '正常': peizhi.carStatus=='0'? '禁止出租':peizhi.carStatus=='2'? '正在维修':peizhi.carStatus=='3'? '已删除':peizhi.carStatus=='4'? '已出租':''}}</el-col>
+			  <el-col :span="12"><span>有无代驾：</span> {{peizhi.hasDriver=='1'? '有': peizhi.isRented=='0'?'无':''}}</el-col>
+			  <el-col :span="12"><span>所属城市：</span> {{peizhi.city}}</el-col>
+			</el-row> -->
 		</div>
+		<el-dialog title="账号注册" width="390px" :visible.sync="dialogFormVisible">
+		  <el-form :model="form" label-width="80px">
+			<el-form-item label="租赁价格">
+			  {{peizhi.rentPrice}} 元/天
+			</el-form-item>
+			<el-form-item label="租赁时长">
+				<el-input-number v-model="form.duration" @change="shichang" :min="1" :max="10" label="描述文字"></el-input-number>
+			  <!-- <el-input v-model="form.duration" @change="shichang" placeholder="请选择租赁时长" autocomplete="off"></el-input> -->
+			</el-form-item>
+			<el-form-item label="租赁总价">
+			  <el-input v-model="form.totalPrice" :disabled="true" autocomplete="off"></el-input>
+			</el-form-item>
+		  </el-form>
+		  <div slot="footer" class="dialog-footer">
+		    <el-button @click="dialogFormVisible = false">取 消</el-button>
+		    <el-button type="primary" @click="zule">确 定</el-button>
+		  </div>
+		</el-dialog>
 	</div>
   </div>
 </body>
-  <!-- import Vue before Element -->
-  <script src="https://unpkg.com/vue/dist/vue.js"></script>
-  <!-- import JavaScript -->
-  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+ <!-- import Vue before Element -->
+ <script src="./js/vue.js"></script>
+ <!-- import JavaScript -->
+ <script src="./js/index.js"></script>
+ <script src="./js/axios.min.js"></script>
   <script>
     new Vue({
       el: '#app',
       data: function() {
          return {
+			dialogFormVisible: false,
+			form:{
+				duration: 1,
+				totalPrice: '',
+			},
+			peizhi:{
+				carName: '',
+				licensePlateNum:'',    //车牌号
+				carXh:'',       //型号
+				isRented:'',       //是否租用（0否，1是）
+				carBandId:'',       //汽车品牌ID
+				rentPrice:'',       //出租价格
+				seatNum:'',        //座位数
+				purpose:'',     //用途
+				releaseTime:'',       //发布时间
+				carStatus:'',       //汽车状态(0禁止出租、1正常、2正在维修，3已删除,4已出租)
+				hasDriver:'',   //有无代驾(0无、1有)
+				city:'',     //所属城市
+			}
             };
       },
 	  methods:{
+		setdata(data){
+			this.peizhi = data
+		},
+		shichang(){
+			let that = this
+			if(that.form.duration>0){
+				that.form.totalPrice = that.form.duration * that.peizhi.rentPrice
+			}else{
+				that.form.totalPrice = ''
+			}
+		},
+		dingdan(){
+			let that = this
+			that.dialogFormVisible = true;
+			that.form.totalPrice = that.form.duration * that.peizhi.rentPrice
+		},
+		zule(){
+			let that = this
+			let form = this.form
+			form.carId = this.peizhi.id
+			if(localStorage.getItem('loginName')){
+				form.loginName = JSON.parse(localStorage.getItem('loginName')).loginName
+				axios.get('http://192.16.106.140:8099/order/creat',{params: form}).then(function (response) {
+					 that.$message({
+						message: '操作成功',
+						type: 'success'
+					  });
+					  that.dialogFormVisible = false;
+					  that.form = {
+							duration: 1,
+							totalPrice: '',
+						}
+				  }) 
+			}else{
+				that.$message({
+					 message: '请登录',
+					 type: 'warning',
+					 duration: 1000,
+					 onClose:()=>{
+						window.location.href='login.html'
+					 }
+				   });
+			}
+		}
+	  },
+	  mounted() {
+		let that = this
+			let idd = location.search.split("=")[1];
+			console.log(idd)
+			axios.get('http://192.16.106.140:8099/carInfo/getCarDetail', 
+			{ params: {
+				id: idd
+			}},).then(function (response) {
+				that.setdata(response.data.data)
+			  })
 	  }
     })
   </script>

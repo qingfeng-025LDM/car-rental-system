@@ -3,13 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <!-- import CSS -->
+  <link rel="stylesheet" href="./css/index.css">
   <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
 </head>
 <body>
   <div id="app">
 	<div style="margin: 10px 10px 0px 10px;">
 		<el-card shadow="always">
-			<el-form :inline="true" class="demo-form-inline">
+			<div style="text-align: right;padding-right: 20px;">
+				<el-dropdown @command="handleCommand">
+				  <span class="el-dropdown-link">
+				    {{loginName}}<i class="el-icon-arrow-down el-icon--right"></i>
+				  </span>
+				  <el-dropdown-menu slot="dropdown">
+				    <el-dropdown-item command="fanhui">返回登陆</el-dropdown-item>
+				  </el-dropdown-menu>
+				</el-dropdown>
+			</div>
+			<!-- <el-form :inline="true" class="demo-form-inline">
 			  <el-form-item label="审批人">
 			    <el-input v-model="formInline.user" placeholder="审批人"></el-input>
 			  </el-form-item>
@@ -31,27 +42,27 @@
 			  <el-form-item>
 			    <el-button type="primary" @click="onSubmit">查询</el-button>
 			  </el-form-item>
-			</el-form>
+			</el-form> -->
 		</el-card>
 	</div>
 	<el-row style="width: 100%;margin: 0px;" :gutter="20">
-	  <el-col class="list-box" :span="4" v-for="(o, index) in 12" :key="o">
+	  <el-col class="list-box" :span="4" v-for="(o, index) in list" :key="o.id">
 	    <el-card :body-style="{ padding: '15px' }">
-	      <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">
+	      <img :src="o.image" class="image">
 	      <div style="padding: 14px;">
 			  <div class="listxinxi">
-				<span>好吃的汉堡</span>
+				<span>{{o.carName}}</span>
 				<span class="pri_ye">
 					<em class="rmb">¥</em>
-					<em class="num">189</em>
+					<em class="num">{{o.rentPrice}}</em>
 					<em class="unit">/日均</em>
 				</span>
 			  </div>
 	        <div class="bottom clearfix">
 	          <!-- <time class="time">{{ currentDate }}</time> -->
-	          <el-button type="text" @click="caozuo" class="button">按钮一</el-button>
-	          <el-button type="text" @click="caozuo" class="button">按钮二</el-button>
-	          <el-button type="text" @click="caozuo" class="button">详情</el-button>
+	          <el-button type="text" class="button">按钮一</el-button>
+	          <el-button type="text" class="button">按钮二</el-button>
+	          <el-button type="text" @click="caozuo(o.id)" class="button">详情</el-button>
 	        </div>
 	      </div>
 	    </el-card>
@@ -60,16 +71,17 @@
   </div>
 </body>
   <!-- import Vue before Element -->
-  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="./js/vue.js"></script>
   <!-- import JavaScript -->
-  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="./js/index.js"></script>
+  <script src="./js/axios.min.js"></script>
   <script>
     new Vue({
       el: '#app',
       data: function() {
          return {
               currentDate: '2020-04-19',
+			  loginName: '',
 			   formInline: {
 					user: '',
 					region: ''
@@ -78,37 +90,39 @@
             };
       },
 	  methods:{
-		caozuo(){
-			this.$confirm('是否操作?', '提示', {
-			  confirmButtonText: '确定',
-			  cancelButtonText: '取消',
-			  type: 'warning'
-			}).then(() => {
-			  this.$message({
-				type: 'success',
-				message: '操作成功!'
-			  });
-			}).catch(() => {
-			  this.$message({
-				type: 'info',
-				message: '已取消操作'
-			  });          
-			});
+		  setdatalist(data){
+			this.list = data;
+			console.log(this.list);
+			console.log(this.list[0].image);
+		  },
+		caozuo(id){
+			window.location.href='xiangqin.html?id='+id
 		},
 		 onSubmit() {
 			console.log('submit!');
+		  },
+		  handleCommand(command){
+			  console.log(command)
+			  if(command=='fanhui'){
+				window.location.href='login.html';
+				 if(localStorage.getItem('loginName')){
+					 localStorage.removeItem('loginName')
+				 }
+			  }
 		  }
 	  },
 	  mounted() {
-	  	axios.get('http://192.16.106.140:8099/user/get', {
-	  	    params: {
-	  	      id: 1
-	  	    }
-	  	  })
-	  	  .then(function (response) {
-			this.list = response.data
-	  	    console.log(response);
-	  	  })
+		  let that = this
+		  if(localStorage.getItem('loginName')){
+			that.loginName = JSON.parse(localStorage.getItem('loginName')).loginName
+		  }else{
+			that.loginName = "未登录"
+		  }
+		  axios.get('http://192.16.106.140:8099/carInfo/getCarList', {}).then(function (response) {
+		  	that.setdatalist(response.data.data)
+		      console.log(response);
+		      console.log(response.data);
+		    })
 	  }
     })
   </script>
@@ -158,6 +172,7 @@
     }
     .image {
       width: 100%;
+	  height: 260px;
       display: block;
     }
     .clearfix {
