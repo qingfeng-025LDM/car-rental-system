@@ -22,7 +22,7 @@ public class CarInfoController {
     private CarInfoService carInfoService;
 
     /**
-     * 车辆详情
+     * 车辆详情：前台
      *
      * @param id
      * @return

@@ -2,6 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
+	<meta http-equiv="Access-Control-Allow-Origin" content="*" />
   <!-- import CSS -->
   <link rel="stylesheet" href="./css/index.css">
   <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
@@ -132,7 +133,7 @@
 			form.carId = this.peizhi.id
 			if(localStorage.getItem('loginName')){
 				form.loginName = JSON.parse(localStorage.getItem('loginName')).loginName
-				axios.get('http://192.16.106.140:8099/order/creat',{params: form}).then(function (response) {
+				axios.get('http://192.16.106.54:8099/order/creat',{params: form}).then(function (response) {
 					 that.$message({
 						message: '操作成功',
 						type: 'success'
@@ -159,7 +160,7 @@
 		let that = this
 			let idd = location.search.split("=")[1];
 			console.log(idd)
-			axios.get('http://192.16.106.140:8099/carInfo/getCarDetail', 
+			axios.get('http://192.16.106.54:8099/carInfo/getCarDetail',
 			{ params: {
 				id: idd
 			}},).then(function (response) {

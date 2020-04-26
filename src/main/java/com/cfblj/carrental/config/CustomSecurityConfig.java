@@ -25,9 +25,9 @@ public class CustomSecurityConfig extends WebSecurityConfigurerAdapter {
         //定制请求的授权规则
         http.authorizeRequests()
                 .antMatchers("/login", "/angularjs/**", "/css/**","/static/images/**",
-                        "/jQuery/**","/js/**", "/webjars/**")      //定义不需要认证就可以访问
+                        "/jQuery/**","/js/**", "/webjars/**", "/others/**", "/page/**")      //定义不需要认证就可以访问
                 .permitAll()                                        //无条件允许访问
-                .antMatchers("/car/**", "/user/**", "/index", "/home", "/", "/order/**")
+                .antMatchers("/car/**",  "/index", "/home", "/")
                 .authenticated();      //其他url需要身份认证(公共部分)
 
         //开启自动配置的登录功能

@@ -2,6 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
+	<meta http-equiv="Access-Control-Allow-Origin" content="*" />
   <!-- import CSS -->
   <link rel="stylesheet" href="./css/index.css">
   <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
@@ -20,29 +21,6 @@
 				  </el-dropdown-menu>
 				</el-dropdown>
 			</div>
-			<!-- <el-form :inline="true" class="demo-form-inline">
-			  <el-form-item label="审批人">
-			    <el-input v-model="formInline.user" placeholder="审批人"></el-input>
-			  </el-form-item>
-			  <el-form-item label="活动区域">
-			    <el-select v-model="formInline.region" placeholder="活动区域">
-			      <el-option label="区域一" value="shanghai"></el-option>
-			      <el-option label="区域二" value="beijing"></el-option>
-			    </el-select>
-			  </el-form-item>
-			  <el-form-item label="审批人">
-			    <el-input v-model="formInline.user" placeholder="审批人1"></el-input>
-			  </el-form-item>
-			  <el-form-item label="审批人">
-			    <el-input v-model="formInline.user" placeholder="审批人2"></el-input>
-			  </el-form-item>
-			  <el-form-item label="审批人">
-			    <el-input v-model="formInline.user" placeholder="审批人3"></el-input>
-			  </el-form-item>
-			  <el-form-item>
-			    <el-button type="primary" @click="onSubmit">查询</el-button>
-			  </el-form-item>
-			</el-form> -->
 		</el-card>
 	</div>
 	<el-row style="width: 100%;margin: 0px;" :gutter="20">
@@ -118,7 +96,7 @@
 		  }else{
 			that.loginName = "未登录"
 		  }
-		  axios.get('http://192.16.106.140:8099/carInfo/getCarList', {}).then(function (response) {
+		  axios.get('http://192.16.106.54:8099/carInfo/getCarList', {}).then(function (response) {
 		  	that.setdatalist(response.data.data)
 		      console.log(response);
 		      console.log(response.data);

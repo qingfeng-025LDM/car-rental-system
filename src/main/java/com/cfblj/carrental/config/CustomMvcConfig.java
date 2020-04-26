@@ -35,6 +35,11 @@ public class CustomMvcConfig extends WebMvcConfigurerAdapter {
                 //订单
                 registry.addViewController("/order/orderList").setViewName("orders/orderInfo.html");   //跳转到销售明细页
                 registry.addViewController("/order/orderDetailList").setViewName("orders/orderdetail.html");   //跳转到销售明细页
+
+                //前台
+                registry.addViewController("/qt/login").setViewName("qt/login.html");
+                registry.addViewController("/qt/index").setViewName("qt/index.html");
+                registry.addViewController("/qt/xiangqin").setViewName("qt/xiangqin.html");
             }
         };
         return webMvcConfigurerAdapter;
