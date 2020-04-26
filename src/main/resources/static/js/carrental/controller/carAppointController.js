@@ -54,40 +54,6 @@ app.controller('carAppointController', function ($scope, $controller, carAppoint
 
         })
     }
-    //保存车辆预约信息
-    $scope.saveCarAppoint=function () {
-        var carAppointRes;
-        if($scope.carAppoint.id != null){
-            carAppointRes = carAppointService.updateCarAppoint($scope.carAppoint); //修改
-        }else{
-            carAppointRes = carAppointService.addCarAppoint($scope.carAppoint);    //添加
-        }
-        carAppointRes.success(
-            function (response) {
-                if(response.success){
-                    $scope.reloadList();
-                    layer.msg(response.msg, {icon: 1});
-                }else{
-                    layer.msg(response.msg, {icon: 2});
-                }
-            }
-        );
-    }
-
-    //获取部门列表
-    $scope.getDepartmentList=function () {
-        departmentService.getAllDepartment().success(
-            function (response) {
-                $scope.departmentList=response;
-
-            }
-        );
-    }
-
-    //监视修改员工信息时员工部门的变化：value2是修改后的部门id，value1是修改前的部门id
-    $scope.$watch('employee.deptId', function (value2, value1) {
-        $scope.oldDeptId = value1;
-    });
 
     //预约状态
     $scope.status=['预约中','正在租用', '已超期', '已取消'];

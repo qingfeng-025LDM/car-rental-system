@@ -6,6 +6,7 @@
     <script th:src="@{/jQuery/jquery.min.js}" type="text/javascript"></script>
     <link th:href="@{/webjars/layui/2.4.5/css/layui.css}" rel="stylesheet" media="all">
     <link rel="stylesheet" th:href="@{/others/css/public.css}" media="all"/>
+    <link rel="stylesheet" th:href="@{/css/editlayer.css}">
 
     <!--angularjs-->
     <script th:src="@{/angularjs/angular.min.js}" type="text/javascript"></script>
@@ -82,28 +83,27 @@
 
 <!-- 添加和修改的弹出层 -->
 <div style="display: none;padding: 20px" id="editOrAddPop">
-    <form class="layui-form layui-row layui-col-space10" lay-filter="dataFrm" id="dataFrm">
-        <div class="layui-col-md12 layui-col-xs12">
-            <div class="layui-row layui-col-space10">
-                <div class="layui-col-md9 layui-col-xs7">
-                    <div class="layui-form-item magt3">
-                        <label class="layui-form-label">品牌名称:</label>
-                        <div class="layui-input-block" style="padding: 5px">
-                            <input type="text"  id="carName" autocomplete="off" class="layui-input"
-                                   lay-verify="required" ng-model="carBand.bandName" style="height: 30px;border-radius: 10px">
-                        </div>
+    <div class="layui-col-md12 layui-col-xs12">
+        <div class="layui-row layui-col-space10">
+            <div class="layui-col-md9 layui-col-xs7">
+                <div class="layui-form-item magt3">
+                    <label class="layui-form-label">品牌名称:</label>
+                    <div class="layui-input-block" style="padding: 5px">
+                        <input type="text"  id="carName" autocomplete="off" class="layui-input"
+                               lay-verify="required" ng-model="carBand.bandName" style="height: 30px;border-radius: 10px">
                     </div>
-                    <div class="layui-form-item magt3">
-                        <label class="layui-form-label">状态:</label>
-                        <div class="layui-input-block" style="padding: 5px">
-                            <input type="text" id="carnumber" autocomplete="off" class="layui-input"
-                                   lay-verify="required" ng-model="status[carBand.status]" style="height: 30px;border-radius: 10px">
-                        </div>
+                </div>
+                <div class="layui-form-item magt3">
+                    <label class="layui-form-label">状态:</label>
+                    <div class="layui-input-block" style="padding: 5px">
+                        <select  class="form-control selectStatus" ng-model="carBand.status">
+                            <option ng-repeat="x in status" value="{{$index}}">{{x}}</option>
+                        </select>
                     </div>
                 </div>
             </div>
         </div>
-    </form>
+    </div>
 </div>
 
 <script type="text/javascript" th:src="@{/webjars/layui/2.4.5/layui.js}"></script>

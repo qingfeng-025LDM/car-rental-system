@@ -14,16 +14,16 @@ import java.util.List;
 /**
  * 自定义UserDetails
  */
-public class MyUserDetails implements UserDetails {
+public class CustomUserDetails implements UserDetails {
 
     private List<Role> roleList;
 
     private User user;
 
-    public MyUserDetails(){
+    public CustomUserDetails(){
     }
 
-    public MyUserDetails(List<Role> roleList, User user){
+    public CustomUserDetails(List<Role> roleList, User user){
         this.roleList = roleList;
         this.user = user;
     }

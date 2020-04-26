@@ -25,7 +25,7 @@ app.controller('carBandController', function ($scope, $controller, carBandServic
             }
         );
     }
-    //商品信息弹窗
+    //品牌信息弹窗
     $scope.editCarBand=function () {
         layui.use('layer', function () {
             var layer = layui.layer;
@@ -112,7 +112,7 @@ app.controller('carBandController', function ($scope, $controller, carBandServic
     //批量删除询问
     $scope.delCarBandsConfirm=function(){
         if ($scope.selectIds.length == 0){
-            layer.alert("请选择要删除的商品", {icon:0})
+            layer.alert("请选择要删除的汽车品牌", {icon:0})
         }else {
             layer.confirm('是否删除？', {
                 btn: ['是', '否']
@@ -123,11 +123,5 @@ app.controller('carBandController', function ($scope, $controller, carBandServic
     }
 
     $scope.status=['禁用', '启用']
-
-    //修改和添加弹窗 隐藏的属性
-    $scope.addNumHide=true;
-    $scope.showAndHide=function(){
-        $scope.addNumHide=!$scope.addNumHide;
-    }
 
 });

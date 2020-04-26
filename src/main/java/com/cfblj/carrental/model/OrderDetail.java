@@ -33,6 +33,9 @@ public class OrderDetail {
     @TableField("car_id")
     private String carId;
 
+    @TableField(exist = false)
+    private CarInfo carInfo;
+
     public String getId() {
         return id;
     }
@@ -95,5 +98,13 @@ public class OrderDetail {
 
     public void setCarId(String carId) {
         this.carId = carId;
+    }
+
+    public CarInfo getCarInfo() {
+        return carInfo;
+    }
+
+    public void setCarInfo(CarInfo carInfo) {
+        this.carInfo = carInfo;
     }
 }

@@ -5,17 +5,19 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
-//使用WebMvcConfigurerAdapter可以来扩展SpringMVC的功能
+/**
+ * 使用WebMvcConfigurerAdapter可以来扩展SpringMVC的功能
+ */
 //@EnableWebMvc   不要接管SpringMVC
 @Configuration
-public class MyMvcConfig extends WebMvcConfigurerAdapter {
+public class CustomMvcConfig extends WebMvcConfigurerAdapter {
 
     @Bean
     public WebMvcConfigurerAdapter webMvcConfigurerAdapter(){
         WebMvcConfigurerAdapter webMvcConfigurerAdapter = new WebMvcConfigurerAdapter() {
             @Override
             public void addViewControllers(ViewControllerRegistry registry) {
-                registry.addViewController("/login").setViewName("login.html");
+                registry.addViewController("/loginPage").setViewName("login.html");
                 registry.addViewController("/home").setViewName("home.html");
                 registry.addViewController("/").setViewName("index.html");
                 registry.addViewController("/index").setViewName("index.html");

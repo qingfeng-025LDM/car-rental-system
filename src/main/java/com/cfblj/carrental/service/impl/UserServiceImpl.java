@@ -1,10 +1,13 @@
 package com.cfblj.carrental.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.cfblj.carrental.exception.CustomException;
 import com.cfblj.carrental.mapper.CarInfoMapper;
+import com.cfblj.carrental.mapper.RoleMapper;
 import com.cfblj.carrental.mapper.UserMapper;
 import com.cfblj.carrental.model.CarInfo;
+import com.cfblj.carrental.model.Role;
 import com.cfblj.carrental.model.User;
 import com.cfblj.carrental.service.CarInfoService;
 import com.cfblj.carrental.service.UserService;
@@ -15,6 +18,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @author Wuhz
  * @date 2020-4-20 18:48
@@ -24,6 +29,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private RoleMapper roleMapper;
 
     @Override
     public User getUserInfoById(String id) {
@@ -49,7 +56,14 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
      */
     @Override
     public User findUserAndRoleByUserId(String username) {
-       User user = userMapper.selectUserAndRoleByUserId(username);
+        if (StringUtils.isBlank(username)){
+            throw new CustomException("用户名不存在");
+        }
+        User user = userMapper.selectOne(new QueryWrapper<User>().eq("login_name", username));
+        if (user != null || StringUtils.isNotBlank(user.getId())){
+            List<Role> roleList = roleMapper.selectRolesByUserId(user.getId());
+            user.setRoleList(roleList);
+        }
         return user;
     }
 }

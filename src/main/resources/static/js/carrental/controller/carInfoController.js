@@ -35,7 +35,6 @@ app.controller('carInfoController', function ($scope, $controller, carInfoServic
         );
     }
 
-  //  $scope.carInfo={};   //初始化
     //保存车辆信息
     $scope.saveCarInfo=function () {
         var carInfoRes;

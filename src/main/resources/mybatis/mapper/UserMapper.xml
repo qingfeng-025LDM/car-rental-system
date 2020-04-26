@@ -23,8 +23,4 @@
         </where>
     </select>
 
-    <select id="selectUserAndRoleByUserId" resultType="com.cfblj.carrental.model.User">
-
-    </select>
-
 </mapper>

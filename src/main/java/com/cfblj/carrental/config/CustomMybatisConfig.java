@@ -5,7 +5,7 @@ import org.apache.ibatis.session.Configuration;
 import org.springframework.context.annotation.Bean;
 
 @org.springframework.context.annotation.Configuration
-public class MybatisCustomConfig {
+public class CustomMybatisConfig {
     @Bean
     public ConfigurationCustomizer configurationCustomizer(){
         return new ConfigurationCustomizer() {

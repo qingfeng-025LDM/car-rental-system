@@ -7,8 +7,4 @@ app.service('userInfoService', function ($http) {
         return $http.get('/user/getUserInfoById?id='+id);
     }
 
-    this.delCategory=function (id) {
-        return $http.get('/category/delCate?id='+id);
-    }
-
 })

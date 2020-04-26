@@ -14,10 +14,10 @@ import org.springframework.stereotype.Component;
  * 自定义AuthenticationProvider登录认证
  */
 @Component
-public class MyAuthenticationProvider implements AuthenticationProvider {
+public class CustomAuthenticationProvider implements AuthenticationProvider {
 
     @Autowired
-    private MyUserDetailsService myUserDetailsService;
+    private CustomUserDetailsService customUserDetailsService;
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
@@ -26,7 +26,7 @@ public class MyAuthenticationProvider implements AuthenticationProvider {
         String username = token.getName();          //前台用户名
         String password = token.getCredentials().toString();    //前台密码
 
-        UserDetails userDetails = myUserDetailsService.loadUserByUsername(username);
+        UserDetails userDetails = customUserDetailsService.loadUserByUsername(username);
         if(userDetails == null){
             throw new UsernameNotFoundException("用户不存在！");
         } else if (!userDetails.getPassword().equals(password)){

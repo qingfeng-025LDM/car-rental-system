@@ -8,12 +8,15 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 
 import javax.annotation.Resource;
 
+/**
+ * 自定义安全访问配置类
+ */
 @Configuration
 @EnableWebSecurity
-public class MySecurityConfig extends WebSecurityConfigurerAdapter {
+public class CustomSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Resource
-    private MyAuthenticationProvider myAuthenticationProvider;      //自定义登录认证
+    private CustomAuthenticationProvider customAuthenticationProvider;      //自定义登录认证
 
     //配置资源的访问权限
     @Override
@@ -21,14 +24,10 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();      //关闭csrf验证，否则拒绝处理提交的post请求
         //定制请求的授权规则
         http.authorizeRequests()
-                .antMatchers("/loginPage", "/angularjs/**", "/css/**","/static/images/**",
+                .antMatchers("/login", "/angularjs/**", "/css/**","/static/images/**",
                         "/jQuery/**","/js/**", "/webjars/**")      //定义不需要认证就可以访问
                 .permitAll()                                        //无条件允许访问
-                .antMatchers("/tempRepSheet/**").hasRole("STOCK")
-                .antMatchers("/purchase/**",  "/purOrderItem/**").hasRole("PURCHASE")
-                .antMatchers("/sell/**", "/sellItem/**").hasRole("SELL")
-                .antMatchers("/stock/**", "/product/**", "/index", "/home", "/", "/category/**", "/repSheet/**",
-                        "/dept/**","/emp/**", "/supplier/**", "/login/updatePassword")
+                .antMatchers("/car/**", "/user/**", "/index", "/home", "/", "/order/**")
                 .authenticated();      //其他url需要身份认证(公共部分)
 
         //开启自动配置的登录功能
@@ -52,7 +51,6 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
     //配置身份认证来源，设置用户权限
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        //auth.inMemoryAuthentication().withUser("admin").password("123456").roles("ADMIN", "PURCHASE", "SELL");
-        auth.authenticationProvider(myAuthenticationProvider);
+        auth.authenticationProvider(customAuthenticationProvider);
     }
 }

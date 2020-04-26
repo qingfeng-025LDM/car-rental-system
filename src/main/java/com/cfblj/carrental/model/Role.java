@@ -7,6 +7,9 @@ import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.io.Serializable;
 
+/**
+ * 角色
+ */
 @TableName("role")
 public class Role implements Serializable {
 

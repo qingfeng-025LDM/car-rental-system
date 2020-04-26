@@ -11,5 +11,4 @@ public interface UserMapper extends BaseMapper<User> {
 
     List<User> selectUserInfo(User user);
 
-    User selectUserAndRoleByUserId(String username);
 }

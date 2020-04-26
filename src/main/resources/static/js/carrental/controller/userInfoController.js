@@ -47,56 +47,9 @@ app.controller('userInfoController', function ($scope, $controller, userInfoServ
         });
     }
 
-    //删除用户
-    $scope.delCategory=function (id) {
-        productCategoryService.delCategory(id).success(
-            function (response) {
-                if(response.success){
-                    $scope.findByParentId($scope.parentId); //重新加载
-                    layer.msg(response.msg, {icon: 1});
-                }else{
-                    layer.msg(response.msg, {icon: 2});
-                }
-            }
-        );
-    }
-    //单个删除询问
-    $scope.delCategoryConfirm=function(id){
-        layer.confirm('是否删除？', {
-            btn: ['是', '否']
-        },function () {
-            $scope.delCategory(id);
-        });
-    }
 
-    //批量删除
-    $scope.delCategories=function () {
-        productCategoryService.delCategories($scope.selectIds).success(
-            function (response) {
-                if(response.success){
-                    $scope.findByParentId($scope.parentId); //重新加载
-                    layer.msg(response.msg, {icon: 1});
-                }else{
-                    layer.msg(response.msg, {icon: 2});
-                }
-            }
-        );
-    }
-    //批量删除询问
-    $scope.delCategoriesConfirm=function(){
-        if ($scope.selectIds.length == 0){
-            layer.alert("请选择要删除的分类", {icon:0})
-        }else {
-            layer.confirm('是否删除？', {
-                btn: ['是', '否']
-            },function () {
-                $scope.delCategories();
-            });
-        }
-    }
 
     $scope.status=['正常', '禁用', '异常']
     $scope.sex=['女', '男']
     $scope.isMember=['否', '是']
-    // $scope.userMember = [{key:"0", value:"否"},{key:"1", value:"是"}]
 });

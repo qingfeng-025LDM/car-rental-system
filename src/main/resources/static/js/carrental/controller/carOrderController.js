@@ -26,7 +26,7 @@ app.controller('carOrderController', function ($scope, $controller, carOrderServ
                 shadeClose: false, //关闭遮罩关闭
                 content: $('#checkCarOrderDetail'), //弹窗的内容
                 cancel: function () {
-                    $scope.hideAndShow();
+                    $scope.toggle();
                 }
             });
 
@@ -77,13 +77,6 @@ app.controller('carOrderController', function ($scope, $controller, carOrderServ
                 }
             }
         );
-    }
-
-
-    //查询采购订单项弹窗的隐藏属性
-    $scope.purOrderItemHide=true;
-    $scope.hideAndShow=function(){
-        $scope.purOrderItemHide=!$scope.purOrderItemHide;
     }
 
     //订单状态

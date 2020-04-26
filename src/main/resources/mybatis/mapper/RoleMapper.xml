@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cfblj.carrental.mapper.RoleMapper">
+
+    <select id="selectRolesByUserId" resultType="com.cfblj.carrental.model.Role">
+        select a.* from role a
+        left join user_role b on b.role_id = a.id
+        where b.user_id = #{userId}
+    </select>
+
+
+</mapper>
