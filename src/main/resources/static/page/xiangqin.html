@@ -2,7 +2,6 @@
 <html>
 <head>
   <meta charset="UTF-8">
-	<meta http-equiv="Access-Control-Allow-Origin" content="*" />
   <!-- import CSS -->
   <link rel="stylesheet" href="./css/index.css">
   <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
@@ -12,11 +11,31 @@
 	<div style="width: 900px;margin: 0 auto;margin-top: 20px;box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)">
 		<div>
 			<div style="text-align: right;padding-right: 20px;"><a style="text-decoration:none;" href="index.html">返回</a></div>
-			<div style="display: inline-block;width: 492px;border: 1px solid #d7dae2;">
+			<div class="d-img">
+				<div style="padding: 10px 10px 0 10px;">
+					<div style="padding-left: 20px;">{{peizhi.carName}}</div>
+					<!-- <el-image width="710" height="402" :src="img1" fit="contain"></el-image> -->
+					<img :src="img1" width="710" height="402"/>
+					<el-button size="mini" type="success" @click="dingdan" >立即预定</el-button>
+				</div>
+				<div class="d-img-list">
+					<div class="img-case" v-bind:style="{left: 36+imgCase*160+'px'}"></div>
+					<button class="pre" @click="preImg"></button>
+					<div class="rh-img-box">
+						<ul v-bind:style="{width:imgSum*162+'px',marginLeft:-imgCur*162+'px'}">
+							<template v-for="(item,index) in xclist">
+								<li @click="clickImg(item,index)" :key="index"><img :src="item.filePath" width="152" height="84" style="margin: 0;"  /></li>
+							</template>
+						</ul>
+					</div>
+					<button class="next" @click="nextImg"></button>
+				</div>
+			</div>
+			<!-- <div style="display: inline-block;width: 492px;border: 1px solid #d7dae2;">
 				<div style="padding-left: 20px;">{{peizhi.carName}}</div>
 				<el-image style="width: 492px; height: 271px" :src="peizhi.image" fit="contain"></el-image>
-			</div>
-			<div style="display: inline-block;width: 400px;height: 271px;">
+			</div> -->
+			<div style="display: inline-block;height: 271px;padding: 20px 50px;">
 				<!-- <el-row style="padding: 30px;" class="jbxx" >
 				  <el-col style="border-bottom: 1px solid #d7dae2;" :span="24"><span>基本信息</el-col>
 				  <el-col :span="24"><span>品   牌：</span> {{peizhi.carName}}</el-col>
@@ -38,7 +57,6 @@
 				  <el-col :span="12"><span>汽车状态：</span> {{peizhi.carStatus=='1'? '正常': peizhi.carStatus=='0'? '禁止出租':peizhi.carStatus=='2'? '正在维修':peizhi.carStatus=='3'? '已删除':peizhi.carStatus=='4'? '已出租':''}}</el-col>
 				  <el-col :span="12"><span>有无代驾：</span> {{peizhi.hasDriver=='1'? '有': peizhi.isRented=='0'?'无':''}}</el-col>
 				  <el-col :span="12"><span>所属城市：</span> {{peizhi.city}}</el-col>
-				   <el-col :span="24"><el-button size="mini" type="success" @click="dingdan" >订单确定</el-button></el-col>
 				</el-row>
 			</div>
 		</div>
@@ -90,10 +108,21 @@
       data: function() {
          return {
 			dialogFormVisible: false,
+			imgSum:0,
+			imgIndex:0,
+			imgCur:0,
+			imgCase:0,
+			img1:'',
 			form:{
 				duration: 1,
 				totalPrice: '',
 			},
+			xclist:[
+				{filePath: 'img/848_a.jpg'},
+				{filePath: 'img/848_b.jpg'},
+				{filePath: 'img/848_c.jpg'},
+				{filePath: 'img/848_d.jpg'},
+			],
 			peizhi:{
 				carName: '',
 				licensePlateNum:'',    //车牌号
@@ -111,6 +140,45 @@
             };
       },
 	  methods:{
+		  preImg(){
+		  	let index = this.imgIndex>0?--this.imgIndex:(this.imgSum-1);
+		  	this.scrollImg(index);
+		  },
+		  nextImg(){
+		  	let index = (this.imgSum-1)==this.imgIndex?0:++this.imgIndex;
+		  	this.scrollImg(index);
+		  },
+		  clickImg(item,index){
+			  console.log(item)
+		  	this.scrollImg(index);
+		  },
+		  scrollImg(index){
+		  	this.imgIndex = index;
+		  	if (index < this.imgCur) {
+		  		if (this.imgSum>5) {
+		  			this.imgCur = index;
+		  			this.imgCase = (5 - (this.imgSum - index))>0?(5 - (this.imgSum - index)):0;
+		  		}else{
+		  			this.imgCur = 0;
+		  			this.imgCase = (this.imgSum - (this.imgSum - index))>0?(this.imgSum - (this.imgSum - index)):0;
+		  		};
+		  	}else{
+		  		if ((this.imgSum - index)>=5) {
+		  			this.imgCase = 0;
+		  			this.imgCur = index;
+		  		}else{
+		  			if (this.imgSum>5) {
+		  				this.imgCur = this.imgSum - 5;
+		  				this.imgCase = 5 - (this.imgSum - index);
+		  			}else{
+		  				this.imgCur = 0;
+		  				this.imgCase = this.imgSum - (this.imgSum - index);
+		  			};
+		  		};
+		  	};
+		  	console.log(this.imgCase+'------'+this.imgCur+'---------'+this.imgSum+'------')
+		  	this.img1 = this.xclist[index].filePath;
+		  },
 		setdata(data){
 			this.peizhi = data
 		},
@@ -133,7 +201,7 @@
 			form.carId = this.peizhi.id
 			if(localStorage.getItem('loginName')){
 				form.loginName = JSON.parse(localStorage.getItem('loginName')).loginName
-				axios.get('http://192.16.106.54:8099/order/creat',{params: form}).then(function (response) {
+				axios.get('http://localhost:8099/order/creat',{params: form}).then(function (response) {
 					 that.$message({
 						message: '操作成功',
 						type: 'success'
@@ -157,15 +225,17 @@
 		}
 	  },
 	  mounted() {
+		this.imgSum = this.xclist.length;
+		this.img1 = this.xclist[0].filePath;
 		let that = this
-			let idd = location.search.split("=")[1];
-			console.log(idd)
-			axios.get('http://192.16.106.54:8099/carInfo/getCarDetail',
-			{ params: {
-				id: idd
-			}},).then(function (response) {
-				that.setdata(response.data.data)
-			  })
+		let idd = location.search.split("=")[1];
+		console.log(idd)
+		axios.get('http://localhost:8099/carInfo/getCarDetail',
+		{ params: {
+			id: idd
+		}},).then(function (response) {
+			that.setdata(response.data.data)
+		  })
 	  }
     })
   </script>
@@ -173,6 +243,9 @@
 	  html,body {
 	    height: 100%;
 	    width: 100%;
+	  }
+	  li {
+	    list-style: none;
 	  }
 	  body,
 	  p,
@@ -203,5 +276,23 @@
 	  .pzxx .el-col{
 		padding: 6px 0px;
 	  }
+	  .d-img img{margin: 0;transition: all 0.5s;}
+	  .d-img .d-img-list{padding-top: 15px;position: relative;height: 100px;}
+	  .d-img .d-img-list ul{transition: all 0.5s;}
+	  .d-img .d-img-list ul li{cursor: pointer;}
+	  .d-img-list .img-case{width: 152px;height: 84px;border: 2px solid #2b3451;position: absolute;left: 36px;top: 15px;transition: all 0.5s;
+	  }
+	  .d-img-list .img-case:before{content: '';width: 0;height: 0;border-bottom: 10px solid #2b3451;border-left: 10px solid transparent;border-right: 10px solid transparent;position: absolute;top: -10px;left: 57px;}
+	  .rh-img-box{width: 640px;float: left;height: 100px;overflow: hidden;}
+	  .d-img{height: 520px;}
+	  .d-img img{vertical-align: top;margin-bottom: 8px;border: 1px solid rgba(0, 0, 0, 0.1);}
+	  /* .d-img .d-img-list{width: 710px;height: 84px;} */
+	  .d-img .d-img-list button{float: left;width: 32px;height: 86px;border: none;}
+	  .d-img .d-img-list ul{float: left;width: 640px;overflow: hidden;height: 100px;}
+	  .d-img .d-img-list ul li{float: left;margin: 0 3px;}
+	  .d-img .d-img-list .pre{background: url(./img/img-prev.png);margin-right: 3px;opacity: 0.2;}
+	  .d-img .d-img-list .pre:hover{opacity: 0.4;}
+	  .d-img .d-img-list .next{background: url(./img/img-next.png);margin-left:3px;opacity: 0.2;}
+	  .d-img .d-img-list .next:hover{opacity: 0.4;}
   </style>
 </html>

@@ -2,7 +2,6 @@
 <html>
 <head>
   <meta charset="UTF-8">
-    <meta http-equiv="Access-Control-Allow-Origin" content="*" />
   <!-- import CSS -->
   <link rel="stylesheet" href="./css/index.css">
   <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
@@ -138,7 +137,7 @@
 			let that = this
 		  this.$refs[formName].validate((valid) => {
 			if (valid) {
-			 axios.get('http://192.16.106.54:8099/user/login',{params: ruleForm}).then(function (response) {
+			 axios.get('http://localhost:8099/user/login',{params: ruleForm}).then(function (response) {
 				 // console.log(response.data)
 				 if(response.data.flag){
 					 localStorage.setItem('loginName',JSON.stringify(that.ruleForm))
@@ -168,7 +167,7 @@
 			let that = this
 			this.$refs.ruleForm1.validate((valid) => {
 				if (valid) {
-				 axios.get('http://192.16.106.54:8099/user/regist',{params: form}).then(function (response) {
+				 axios.get('http://localhost:8099/user/regist',{params: form}).then(function (response) {
 					that.$message({
 					   message: '恭喜你，注册成功',
 					   type: 'success'
